@@ -115,8 +115,8 @@ th, td {
     border-bottom: 1px solid #ddd;
 }
 
-th, .projet-title !important {
-    font-weight: 700; /* Bold */
+th, .projet-title {
+    font-weight: 700 !important; /* Bold */
 }
 
 .preview {
