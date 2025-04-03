@@ -1,23 +1,23 @@
 {
-    "avatar": "./img/avatar/karimbel.jpg",
+    "avatar": "../images/avatar/karimbel.jpg",
     "title": "Karim - Portfolio",
     "description": "Je suis Formateur Professionnel pour Adultes, passionné par la transmission des savoirs et des compétences. J’accompagne mes apprenants dans l’univers de l’informatique, des langages de programmation, des technologies du web et de la photographie, avec pour objectif de rendre ces domaines accessibles et captivants.",
     "linkedin": "https://www.linkedin.com/in/karimbelkacem/",
     "projects": [
         {
-            "preview": "./img/preview/projet1.jpg",
+            "preview": "../images/preview/projet1.jpg",
             "title": "Émancipation",
             "description": "Émancipation est un jeu de découverte, qui te permet de parcourir à travers des questionnements et des apports de connaissances l'autodétermination que possèdent les personnes en situation de handicap vivant en établissement médico-social pour gagner en autonomie.",
             "link": "https://karimbel.github.io/portfolio/emancipation/story.html"
         },
         {
-            "preview": "./img/preview/defaut.png",
+            "preview": "../images/preview/defaut.png",
             "title": "Projet 2",
             "description": "Description du deuxième projet",
             "link": "https://karimbel.github.io/portfolio/"
         },
         {
-            "preview": "./img/preview/defaut.png",
+            "preview": "../images/preview/defaut.png",
             "title": "Projet 3",
             "description": "Description du troisième projet",
             "link": "https://karimbel.github.io/portfolio/"
