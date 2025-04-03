@@ -42,7 +42,12 @@
             .then(response => response.json())
             .then(data => {
                 // Sidebar
-                document.getElementById('avatar').src = data.avatar;
+                const avatarImg = document.getElementById('avatar');
+		avatarImg.src = data.avatar;
+		avatarImg.onerror = () => {
+		   console.error('Erreur de chargement de l’avatar');
+		   avatarImg.src = './images/projet/defaut.png'; // Image de secours
+		};
                 document.getElementById('portfolio-title').textContent = data.title;
                 document.getElementById('description').textContent = data.description;
                 document.getElementById('linkedin-link').href = data.linkedin;
@@ -58,6 +63,13 @@
                         <td><a href="${project.link}" target="_blank" class="btn">Visiter</a></td>
                     `;
                     tableBody.appendChild(row);
+
+		    const previewImg = row.querySelector('.preview');
+      		    previewImg.onerror = () => {
+        	       console.error(`Erreur de chargement de l’image pour ${project.title}`);
+                       previewImg.src = './images/projet/defaut.png'; // Chemin relatif
+      		    };
+
                 });
             })
             .catch(error => console.error('Erreur:', error));
