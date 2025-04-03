@@ -122,6 +122,7 @@ th, .projet-title {
 /* blocage de la couleur de fond de l'entête du tableau */
 th, th:hover {
   background-color: #fff;
+  color: #000;
 }
 
 /* effet de transition de la ligne */
