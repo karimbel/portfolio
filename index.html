@@ -67,14 +67,14 @@
                     `;
                     tableBody.appendChild(row);
 
-		    const previewImg = row.querySelector('.preview');
-      		    previewImg.onerror = () => {
-        	       console.error(`Erreur de chargement de l’image pour ${project.title}`);
-                       previewImg.src = './images/projet/defaut.png'; // Chemin relatif
-      		    };
+    		    const previewImg = row.querySelector('.preview');
+          		    previewImg.onerror = () => {
+            	       console.error(`Erreur de chargement de l’image pour ${project.title}`);
+                           previewImg.src = './images/projet/defaut.png'; // Chemin relatif
+          		    };
 
-                });
-            })
+                    });
+                })
             .catch(error => console.error('Erreur:', error));
     </script>
 </body>
