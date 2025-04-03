@@ -115,7 +115,7 @@ th, td {
     border-bottom: 1px solid #ddd;
 }
 
-td.projet {
+th, td.projet {
     font-weight: bold;
 }
 
