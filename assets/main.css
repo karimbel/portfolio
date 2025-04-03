@@ -16,6 +16,7 @@ h1, #portfolio-title {
 
 p, td, th {
     font-weight: 400; /* Poids normal */
+    font-size: 0.8em; /* Réduit à 80% de la taille de la police parente */
 }
 
 /* Pour le bouton */
