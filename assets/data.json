@@ -1,23 +1,23 @@
 {
-    "avatar": "../images/avatar/karimbel.jpg",
+    "avatar": "/portfolio/images/avatar/karimbel.jpg",
     "title": "Karim / Portfolio",
     "description": "Formateur pour adultes spécialisé dans la gestion de projet numérique, je conçois et anime des parcours pédagogiques innovants adaptés aux besoins des apprenants. En tant que concepteur eLearning, je maîtrise des outils comme Storyline 360 et Moodle pour créer des expériences d’apprentissage interactives et engageantes. Passionné par les arts, le design et la photographie, j’intègre une dimension créative à mes projets, alliant esthétique et efficacité pour offrir des solutions numériques percutantes.",
     "linkedin": "https://www.linkedin.com/in/karimbelkacem/",
     "projects": [
         {
-            "preview": "../images/projet/projet1.jpg",
+            "preview": "/portfolio/images/projet/projet1.jpg",
             "title": "Émancipation",
             "description": "Émancipation est un jeu de découverte, qui te permet de parcourir à travers des questionnements et des apports de connaissances l'autodétermination que possèdent les personnes en situation de handicap vivant en établissement médico-social pour gagner en autonomie.",
             "link": "https://karimbel.github.io/portfolio/emancipation/story.html"
         },
         {
-            "preview": "../images/projet/defaut.png",
+            "preview": "/portfolio/images/projet/defaut.png",
             "title": "Projet 2",
             "description": "Description du deuxième projet",
             "link": "https://karimbel.github.io/portfolio/"
         },
         {
-            "preview": "../images/projet/defaut.png",
+            "preview": "/portfolio/images/projet/defaut.png",
             "title": "Projet 3",
             "description": "Description du troisième projet",
             "link": "https://karimbel.github.io/portfolio/"
