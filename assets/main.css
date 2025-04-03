@@ -30,7 +30,7 @@ p, td, th {
 }
 
 .sidebar {
-    width: 40%;
+    width: 30%;
     background-color: #f0f0f0;
     padding: 20px;
     display: flex;
@@ -39,7 +39,7 @@ p, td, th {
 }
 
 .content {
-    width: 60%;
+    width: 70%;
     background-color: #ffffff;
     padding: 20px;
 }
