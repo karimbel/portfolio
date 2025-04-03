@@ -115,6 +115,10 @@ th, td {
     border-bottom: 1px solid #ddd;
 }
 
+td.projet {
+    font-weight: bold;
+}
+
 .preview {
     width: 100px;
     height: 60px;
