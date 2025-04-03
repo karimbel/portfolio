@@ -21,6 +21,22 @@ p, td, th {
     line-height: 1.6; /* Interlignage augmenté pour les paragraphes */
 }
 
+/* Style pour les images dans le tableau */
+table img {
+  width: 100px; /* Largeur fixe pour les thumbnails */
+  height: 100px; /* Hauteur fixe pour uniformité */
+  object-fit: cover; /* Coupe l'image si elle ne rentre pas */
+  border: 2px solid #ccc; /* Bordure légère */
+  border-radius: 5px; /* Coins arrondis */
+  transition: transform 0.3s; /* Animation au survol */
+}
+
+/* Effet au survol (optionnel) */
+table img:hover {
+  transform: scale(1.1); /* Agrandit légèrement l'image */
+  cursor: pointer; /* Indique qu'elle est cliquable */
+}
+
 /* Bouton générique */
 .btn {
     font-weight: 700;
