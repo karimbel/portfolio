@@ -119,6 +119,11 @@ th, .projet-title {
     font-weight: 700 !important; /* Bold */
 }
 
+/* blocage de la couleur de fond de l'entête du tableau */
+th, th:hover {
+  background-color: #fff;
+}
+
 /* effet de transition de la ligne */
 tr {
   transition: background-color 0.3s ease; /* Animation fluide */
