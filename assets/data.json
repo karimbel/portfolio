@@ -5,19 +5,19 @@
     "linkedin": "https://www.linkedin.com/in/karimbelkacem/",
     "projects": [
         {
-            "preview": "../images/preview/projet1.jpg",
+            "preview": "../images/projet/projet1.jpg",
             "title": "Émancipation",
             "description": "Émancipation est un jeu de découverte, qui te permet de parcourir à travers des questionnements et des apports de connaissances l'autodétermination que possèdent les personnes en situation de handicap vivant en établissement médico-social pour gagner en autonomie.",
             "link": "https://karimbel.github.io/portfolio/emancipation/story.html"
         },
         {
-            "preview": "../images/preview/defaut.png",
+            "preview": "../images/projet/defaut.png",
             "title": "Projet 2",
             "description": "Description du deuxième projet",
             "link": "https://karimbel.github.io/portfolio/"
         },
         {
-            "preview": "../images/preview/defaut.png",
+            "preview": "../images/projet/defaut.png",
             "title": "Projet 3",
             "description": "Description du troisième projet",
             "link": "https://karimbel.github.io/portfolio/"
