@@ -7,7 +7,7 @@
         {
             "preview": "/portfolio/images/projet/projet1.png",
             "title": "Émancipation",
-            "description": "Émancipation est un jeu de découverte, qui permet de découvrir à l'apprenant à travers un parcours aléatoire de questionnements et d'apports de connaissances l'autodétermination que possèdent les personnes en situation de handicap vivant en établissement médico-social pour gagner en autonomie.",
+            "description": "Émancipation est un jeu de découverte, qui permet à l'apprenant de découvrir à travers un parcours de questionnements et d'apports de connaissances aléatoire, l'autodétermination que possèdent les personnes en situation de handicap vivant en établissement médico-social pour gagner en autonomie.",
             "caracteristique": "Storyline360, Javascript, HTML5",
             "link": "https://karimbel.github.io/portfolio/emancipation/story.html"
         },
