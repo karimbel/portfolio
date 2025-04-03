@@ -173,4 +173,9 @@ tr:hover {
     .follow-btn {
         margin-top: 10px;
     }
+
+    .preview {
+      width: 150px; /* Largeur fixe pour les thumbnails */
+    }
+
 }
