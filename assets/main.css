@@ -150,6 +150,10 @@ tr:hover {
     .sidebar, .content {
         width: 100%;
     }
+
+    th:nth-child(3), td:nth-child(3) {
+        display: none;
+    }
     
     .avatar {
         margin: 0 auto;
