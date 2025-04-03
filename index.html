@@ -56,7 +56,7 @@
                 // Tableau des projets
                 const tableBody = document.getElementById('projects-table');
                 data.projects.forEach(project => {
-                    const row = document.createElement('tr class="projects-tr"');
+                    const row = document.createElement('tr');
                     row.innerHTML = `
                         <td><img src="${project.preview}" alt="${project.title}" class="preview"></td>
                         <td class="projet-title">${project.title}</td>
