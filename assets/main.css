@@ -5,8 +5,22 @@
 }
 
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Montserrat', sans-serif;
     min-height: 100vh;
+}
+
+/* Ou appliquer à des éléments spécifiques */
+h1, #portfolio-title {
+    font-weight: 700; /* Poids bold */
+}
+
+p, td, th {
+    font-weight: 400; /* Poids normal */
+}
+
+/* Pour le bouton */
+.btn {
+    font-weight: 700;
 }
 
 .container {
