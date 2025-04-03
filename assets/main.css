@@ -9,21 +9,32 @@ body {
     min-height: 100vh;
 }
 
-/* Ou appliquer à des éléments spécifiques */
+/* Typographie */
 h1, #portfolio-title {
-    font-weight: 700; /* Poids bold */
+    font-weight: 700; /* Bold */
 }
 
 p, td, th {
-    font-weight: 400; /* Poids normal */
-    font-size: 0.8em; /* Réduit à 80% de la taille de la police parente */
+    font-weight: 400; /* Normal */
+    font-size: 0.8em; /* 80% de la taille parente */
 }
 
-/* Pour le bouton */
+/* Bouton générique */
 .btn {
     font-weight: 700;
+    display: inline-block;
+    padding: 8px 15px;
+    background-color: #0077b5;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
 }
 
+.btn:hover {
+    background-color: #005582;
+}
+
+/* Layout principal */
 .container {
     display: flex;
     min-height: 100vh;
@@ -45,6 +56,7 @@ p, td, th {
     padding: 20px;
 }
 
+/* Éléments de la sidebar */
 .avatar {
     width: 150px;
     height: 150px;
@@ -52,11 +64,43 @@ p, td, th {
     object-fit: cover;
 }
 
-.social img {
-    width: 30px;
-    height: 30px;
+.portfolio-header {
+    display: flex;
+    align-items: center; /* Aligne titre et bouton verticalement */
+    justify-content: space-between; /* Espace entre titre et bouton */
+    gap: 10px; /* Espace minimum entre les éléments */
 }
 
+#portfolio-title {
+    font-size: 1.5em; /* Taille ajustée pour le titre */
+    margin: 0; /* Supprime marges par défaut */
+}
+
+.follow-btn {
+    display: flex;
+    align-items: center; /* Aligne texte et icône */
+    text-decoration: none;
+    color: #0077b5; /* Couleur LinkedIn */
+    font-size: 0.9em; /* Plus petit que le titre */
+    font-weight: 700; /* Cohérent avec .btn */
+}
+
+.follow-btn:hover {
+    color: #005582; /* Hover cohérent avec .btn */
+}
+
+.linkedin-icon {
+    width: 20px; /* Icône plus petite */
+    height: 20px;
+    margin-left: 8px; /* Espace entre texte et icône */
+}
+
+/* Suppression de .social img car plus utilisé */
+#description {
+    margin: 0; /* Cohérence avec les autres éléments */
+}
+
+/* Tableaux */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -74,19 +118,6 @@ th, td {
     object-fit: cover;
 }
 
-.btn {
-    display: inline-block;
-    padding: 8px 15px;
-    background-color: #0077b5;
-    color: white;
-    text-decoration: none;
-    border-radius: 4px;
-}
-
-.btn:hover {
-    background-color: #005582;
-}
-
 /* Responsive Design */
 @media (max-width: 768px) {
     .container {
@@ -99,5 +130,14 @@ th, td {
     
     .avatar {
         margin: 0 auto;
+    }
+    
+    .portfolio-header {
+        flex-direction: column; /* Empile titre et bouton sur mobile */
+        align-items: flex-start; /* Alignement à gauche */
+    }
+    
+    .follow-btn {
+        margin-top: 10px; /* Espace entre titre et bouton */
     }
 }
