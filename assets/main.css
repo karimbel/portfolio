@@ -85,7 +85,7 @@ p, td, th {
     color: #0077b5; /* Couleur LinkedIn */
     font-size: 0.9em;
     font-weight: 700;
-    line-height: 1.6; /* Interlignage cohérent avec le titre */
+    line-height: 1.4; /* Interlignage cohérent avec le titre */
 }
 
 .follow-btn:hover {
@@ -93,9 +93,9 @@ p, td, th {
 }
 
 .linkedin-icon {
-    width: 24px;
-    height: 24px;
-    margin-left: 6px;
+    width: 20px; /* Augmentation légère de 16px à 20px */
+    height: 20px;
+    margin-left: 8px; /* Légère augmentation de la marge pour équilibrer */
 }
 
 #description {
