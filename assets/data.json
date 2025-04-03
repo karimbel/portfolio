@@ -8,12 +8,14 @@
             "preview": "/portfolio/images/projet/projet1.png",
             "title": "Émancipation",
             "description": "Émancipation est un jeu de découverte, qui te permet de parcourir à travers des questionnements et des apports de connaissances l'autodétermination que possèdent les personnes en situation de handicap vivant en établissement médico-social pour gagner en autonomie.",
+            "caracteristique": "Storyline360, Javascript",
             "link": "https://karimbel.github.io/portfolio/emancipation/story.html"
         },
         {
             "preview": "/portfolio/images/projet/projet2.png",
             "title": "EV - La valeur d'exposition",
             "description": "Dans cet exercice, manipulez un curseur allant de -6 à +10 EV pour ajuster la valeur d’exposition d’une image. Une représentation visuelle affiche en temps réel l’impact de votre choix sur la luminosité, vous permettant de voir comment l’EV influence le rendu. Pour aller plus loin, des explications détaillées explorent les bases théoriques de l’EV, combinant ouverture, vitesse d’obturation et sensibilité ISO. Idéal pour comprendre concrètement cette notion essentielle en photographie !",
+            "caracteristique": "Storyline360, Javascript",
             "link": "https://karimbel.github.io/portfolio/ev-exposure-value/story.html"
         },
         {

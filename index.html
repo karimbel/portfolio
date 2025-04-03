@@ -27,6 +27,7 @@
                         <th> </th>
                         <th>Projet</th>
                         <th>Description</th>
+                        <th>Caractéristique</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -44,11 +45,11 @@
             .then(data => {
                 // Sidebar
                 const avatarImg = document.getElementById('avatar');
-		avatarImg.src = data.avatar;
-		avatarImg.onerror = () => {
-		   console.error('Erreur de chargement de l’avatar');
-		   avatarImg.src = './images/projet/defaut.png'; // Image de secours
-		};
+		        avatarImg.src = data.avatar;
+		        avatarImg.onerror = () => {
+		        console.error('Erreur de chargement de l’avatar');
+		        avatarImg.src = './images/projet/defaut.png'; // Image de secours
+		    };
                 document.getElementById('portfolio-title').textContent = data.title;
                 document.getElementById('description').textContent = data.description;
                 document.getElementById('linkedin-link').href = data.linkedin;
@@ -61,6 +62,7 @@
                         <td><img src="${project.preview}" alt="${project.title}" class="preview"></td>
                         <td class="projet-title">${project.title}</td>
                         <td>${project.description}</td>
+                        <td>${project.caracteristique}</td>
                         <td><a href="${project.link}" target="_blank" class="btn">Visiter</a></td>
                     `;
                     tableBody.appendChild(row);
