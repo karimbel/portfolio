@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <img id="avatar" src="" alt="Avatar" class="avatar">
+            <h1 id="portfolio-title"></h1>
+            <p id="description"></p>
+            <div class="social">
+                <a id="linkedin-link" href="" target="_blank">
+                    <img src="https://content.linkedin.com/content/dam/me/business/en-us/amp/brand-site/v2/bg/LI-Bug.svg.original.svg" alt="LinkedIn">
+                </a>
+            </div>
+        </aside>
+        <main class="content">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Preview</th>
+                        <th>Titre</th>
+                        <th>Descriptif</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody id="projects-table">
+                    <!-- Les projets seront insérés ici via JavaScript -->
+                </tbody>
+            </table>
+        </main>
+    </div>
+
+    <script>
+        // Charger les données depuis le fichier JSON
+        fetch('data.json')
+            .then(response => response.json())
+            .then(data => {
+                // Sidebar
+                document.getElementById('avatar').src = data.avatar;
+                document.getElementById('portfolio-title').textContent = data.title;
+                document.getElementById('description').textContent = data.description;
+                document.getElementById('linkedin-link').href = data.linkedin;
+
+                // Tableau des projets
+                const tableBody = document.getElementById('projects-table');
+                data.projects.forEach(project => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td><img src="${project.preview}" alt="${project.title}" class="preview"></td>
+                        <td>${project.title}</td>
+                        <td>${project.description}</td>
+                        <td><a href="${project.link}" target="_blank" class="btn">Visiter</a></td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+            })
+            .catch(error => console.error('Erreur:', error));
+    </script>
+</body>
+</html>
