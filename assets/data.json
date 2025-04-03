@@ -2,25 +2,25 @@
     "avatar": "./img/avatar/karimbel.jpg",
     "title": "Mon Portfolio",
     "description": "Développeur web passionné par la création de solutions innovantes",
-    "linkedin": "https://www.linkedin.com/in/votre-profil",
+    "linkedin": "https://www.linkedin.com/in/karimbelkacem/",
     "projects": [
         {
             "preview": "./img/preview/projet1.jpg",
-            "title": "Projet 1",
-            "description": "Description du premier projet",
-            "link": "https://lien-vers-projet1.com"
+            "title": "Autodétermination",
+            "description": "Plateau de jeu pour acquérir ou consolider des connaissances sur l'autodétermination des personnes en situation de handicap.",
+            "link": "https://karimbel.github.io/portfolio/autodetermination/story.html"
         },
         {
-            "preview": "./img/preview/projet2.jpg",
+            "preview": "./img/preview/defaut.png",
             "title": "Projet 2",
             "description": "Description du deuxième projet",
-            "link": "https://lien-vers-projet2.com"
+            "link": "https://karimbel.github.io/portfolio/"
         },
         {
-            "preview": "./img/preview/projet3.jpg",
+            "preview": "./img/preview/defaut.png",
             "title": "Projet 3",
             "description": "Description du troisième projet",
-            "link": "https://lien-vers-projet3.com"
+            "link": "https://karimbel.github.io/portfolio/"
         }
     ]
 }
