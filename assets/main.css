@@ -130,7 +130,7 @@ th, .projet-title {
 }
 
 /* Effet au survol (optionnel) */
-table img:hover {
+tr img:hover {
   transform: scale(1.1); /* Agrandit légèrement l'image */
   cursor: pointer; /* Indique qu'elle est cliquable */
 }
