@@ -7,14 +7,14 @@
         {
             "preview": "/portfolio/images/projet/projet1.png",
             "title": "Émancipation",
-            "description": "Émancipation est un jeu de découverte, qui permet à l'apprenant de découvrir à travers un parcours de questionnements et d'apports de connaissances aléatoire, l'autodétermination que possèdent les personnes en situation de handicap vivant en établissement médico-social pour gagner en autonomie.",
+            "description": "Émancipation est un jeu de découverte, qui permet à l'apprenant de découvrir à travers un parcours de questionnements et d'apports de connaissances aléatoires, l'autodétermination que possèdent les personnes en situation de handicap vivant en établissement médico-social pour gagner en autonomie.",
             "caracteristique": "Storyline360, Javascript, HTML5",
             "link": "https://karimbel.github.io/portfolio/emancipation/story.html"
         },
         {
             "preview": "/portfolio/images/projet/projet2.png",
             "title": "Valeur d'Exposition",
-            "description": "Dans cet exercice, l'apprenant manipule un curseur allant de -6 à +10 EV pour ajuster la valeur d’exposition d’une image en photographie. Une représentation visuelle affiche en temps réel l’impact de votre choix sur la luminosité, lui permettant de voir comment l’EV influence le rendu et les paramètres. Pour aller plus loin, des explications détaillées explorent les bases théoriques de l’EV, combinant ouverture, vitesse d’obturation et sensibilité ISO. Idéal pour comprendre concrètement cette notion essentielle en photographie !",
+            "description": "Dans cet exercice, l'apprenant manipule un curseur pour ajuster la valeur d’exposition d’une image. Une représentation visuelle affiche en temps réel l’impact de son choix sur la luminosité, lui permettant de voir comment l’EV influence le rendu de l'image et les paramètres de l'appareil photo. Pour aller plus loin, des explications détaillées explorent les bases théoriques de l’EV, combinant ouverture, vitesse d’obturation et sensibilité ISO. Idéal pour comprendre concrètement cette notion essentielle en photographie.",
             "caracteristique": "Storyline360, Javascript, HTML5",
             "link": "https://karimbel.github.io/portfolio/ev-exposure-value/story.html"
         }
