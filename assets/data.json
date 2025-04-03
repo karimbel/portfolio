@@ -1,26 +1,26 @@
 {
-  "avatar": "https://www.example.com/avatar.jpg",
-  "title": "Portfolio de Jean Dupont",
-  "description": "Photographe passionné par le portrait et l'architecture, je vous invite à découvrir mes créations.",
-  "linkedin": "https://www.linkedin.com/in/jeandupont",
-  "projects": [
-    {
-      "preview": "https://www.example.com/project1-preview.jpg",
-      "title": "Portrait en studio",
-      "description": "Une série de portraits réalisés en studio avec une lumière naturelle et douce.",
-      "link": "https://www.example.com/project1"
-    },
-    {
-      "preview": "https://www.example.com/project2-preview.jpg",
-      "title": "Architecture moderne",
-      "description": "Des photos d'architecture capturant la beauté des lignes et des espaces modernes.",
-      "link": "https://www.example.com/project2"
-    },
-    {
-      "preview": "https://www.example.com/project3-preview.jpg",
-      "title": "Nature et paysage",
-      "description": "Des paysages sauvages et des scènes de nature pour vous inspirer et vous émerveiller.",
-      "link": "https://www.example.com/project3"
-    }
-  ]
+    "avatar": "./img/avatar/karimbel.jpg",
+    "title": "Mon Portfolio",
+    "description": "Développeur web passionné par la création de solutions innovantes",
+    "linkedin": "https://www.linkedin.com/in/votre-profil",
+    "projects": [
+        {
+            "preview": "./img/preview/projet1.jpg",
+            "title": "Projet 1",
+            "description": "Description du premier projet",
+            "link": "https://lien-vers-projet1.com"
+        },
+        {
+            "preview": "./img/preview/projet2.jpg",
+            "title": "Projet 2",
+            "description": "Description du deuxième projet",
+            "link": "https://lien-vers-projet2.com"
+        },
+        {
+            "preview": "./img/preview/projet3.jpg",
+            "title": "Projet 3",
+            "description": "Description du troisième projet",
+            "link": "https://lien-vers-projet3.com"
+        }
+    ]
 }
