@@ -66,38 +66,37 @@ p, td, th {
 
 .portfolio-header {
     display: flex;
-    align-items: center; /* Aligne titre et bouton verticalement */
-    justify-content: space-between; /* Espace entre titre et bouton */
-    gap: 10px; /* Espace minimum entre les éléments */
+    align-items: baseline; /* Aligne sur la ligne de base du texte */
+    justify-content: space-between; /* Espace entre titre et lien */
+    gap: 10px; /* Espace minimum */
 }
 
 #portfolio-title {
-    font-size: 1.5em; /* Taille ajustée pour le titre */
-    margin: 0; /* Supprime marges par défaut */
+    font-size: 1.5em; /* Taille du titre */
+    margin: 0;
 }
 
 .follow-btn {
     display: flex;
-    align-items: center; /* Aligne texte et icône */
+    align-items: center; /* Centre l’icône avec le texte */
     text-decoration: none;
     color: #0077b5; /* Couleur LinkedIn */
     font-size: 0.9em; /* Plus petit que le titre */
-    font-weight: 700; /* Cohérent avec .btn */
+    font-weight: 700;
 }
 
 .follow-btn:hover {
-    color: #005582; /* Hover cohérent avec .btn */
+    color: #005582; /* Hover discret */
 }
 
 .linkedin-icon {
-    width: 20px; /* Icône plus petite */
-    height: 20px;
-    margin-left: 8px; /* Espace entre texte et icône */
+    width: 16px; /* Réduction de la taille de l’icône */
+    height: 16px;
+    margin-left: 6px; /* Espace réduit entre texte et icône */
 }
 
-/* Suppression de .social img car plus utilisé */
 #description {
-    margin: 0; /* Cohérence avec les autres éléments */
+    margin: 0;
 }
 
 /* Tableaux */
@@ -133,11 +132,11 @@ th, td {
     }
     
     .portfolio-header {
-        flex-direction: column; /* Empile titre et bouton sur mobile */
-        align-items: flex-start; /* Alignement à gauche */
+        flex-direction: column;
+        align-items: flex-start;
     }
     
     .follow-btn {
-        margin-top: 10px; /* Espace entre titre et bouton */
+        margin-top: 10px;
     }
 }
