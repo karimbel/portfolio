@@ -122,11 +122,13 @@ th, .projet-title {
 /* effet de transition de la ligne */
 tr {
   transition: background-color 0.3s ease; /* Animation fluide */
+  color: #bbb;
 }
 
 /* Surbrillance au survol de la ligne */
 tr:hover {
-  background-color: #e0e0ff; /* Bleu pâle */
+  background-color: #f5f5f5; /* Couleur de fond gris clair */
+  color: #000;
 }
 
 /* Style pour les images dans le tableau */
