@@ -11,10 +11,10 @@
             "link": "https://karimbel.github.io/portfolio/emancipation/story.html"
         },
         {
-            "preview": "/portfolio/images/projet/defaut.png",
-            "title": "Projet 2",
-            "description": "Description du deuxième projet",
-            "link": "https://karimbel.github.io/portfolio/"
+            "preview": "/portfolio/images/projet/projet2.png",
+            "title": "EV - La valeur d'exposition",
+            "description": "Dans cet exercice, manipulez un curseur allant de -6 à +10 EV pour ajuster la valeur d’exposition d’une image. Une représentation visuelle affiche en temps réel l’impact de votre choix sur la luminosité, vous permettant de voir comment l’EV influence le rendu. Pour aller plus loin, des explications détaillées explorent les bases théoriques de l’EV, combinant ouverture, vitesse d’obturation et sensibilité ISO. Idéal pour comprendre concrètement cette notion essentielle en photographie !",
+            "link": "https://karimbel.github.io/portfolio/ev-exposure-value/story.html"
         },
         {
             "preview": "/portfolio/images/projet/defaut.png",
