@@ -129,20 +129,6 @@ th, .projet-title {
   transition: transform 0.3s; /* Animation au survol */
 }
 
-/* Effet au survol (optionnel) */
-tr:hover {
-  transform: scale(1.1); /* Agrandit légèrement l'image */
-  cursor: pointer; /* Indique qu'elle est cliquable */
-}
-
-/*
-.preview {
-    width: 100px;
-    height: 60px;
-    object-fit: cover;
-}
-*/
-
 /* Responsive Design */
 @media (max-width: 768px) {
     .container {
