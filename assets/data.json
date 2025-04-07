@@ -5,11 +5,10 @@
     "linkedin": "https://www.linkedin.com/in/karimbelkacem/",
     "projects": [
         {
-            "preview": "/portfolio/images/projet/projet1.png",
-            "title": "Émancipation",
-            "description": "Émancipation est un jeu de découverte, qui permet à l'apprenant de découvrir à travers un parcours de questionnements et d'apports de connaissances aléatoires, l'autodétermination que possèdent les personnes en situation de handicap vivant en établissement médico-social pour gagner en autonomie.",
-            "caracteristique": "Storyline360, Javascript, HTML5",
-            "link": "https://karimbel.github.io/portfolio/emancipation/story.html"
+            "preview": "/portfolio/images/projet/projet3.png",
+            "title": "Evaluer une action de formation",
+            "description": "Dans ce module, le formateurs-apprenant va découvrir des méthodes et des outils pour évaluer avec précision et pertinence. Plus qu’un simple bilan, l’évaluation est un levier pour optimiser vos actions futures. Préparez-vous à explorer ce processus structuré et à en faire un atout pour votre organisation",
+            "link": "https://karimbel.github.io/portfolio/ev-exposure-value/story.html"
         },
         {
             "preview": "/portfolio/images/projet/projet2.png",
@@ -17,6 +16,13 @@
             "description": "Dans cet exercice, l'apprenant manipule un curseur pour ajuster la valeur d’exposition d’une image. Une représentation visuelle affiche en temps réel l’impact de son choix sur la luminosité, lui permettant de voir comment l’EV influence le rendu de l'image et les paramètres de l'appareil photo. Pour aller plus loin, des explications détaillées explorent les bases théoriques de l’EV, combinant ouverture, vitesse d’obturation et sensibilité ISO. Idéal pour comprendre concrètement cette notion essentielle en photographie.",
             "caracteristique": "Storyline360, Javascript, HTML5",
             "link": "https://karimbel.github.io/portfolio/ev-exposure-value/story.html"
+        },
+        {
+            "preview": "/portfolio/images/projet/projet1.png",
+            "title": "Émancipation",
+            "description": "Émancipation est un jeu de découverte, qui permet à l'apprenant de découvrir à travers un parcours de questionnements et d'apports de connaissances aléatoires, l'autodétermination que possèdent les personnes en situation de handicap vivant en établissement médico-social pour gagner en autonomie.",
+            "caracteristique": "Storyline360, Javascript, HTML5",
+            "link": "https://karimbel.github.io/portfolio/emancipation/story.html"
         }
     ]
 }
