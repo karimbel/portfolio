@@ -1453,7 +1453,6 @@
       <string id="closed_captions">Sous-titres</string>
       <string id="closedcaptions_shortcut">Activer / Désactiver les sous-titres</string>
       <string id="comma_key">Virgule</string>
-      <string id="continue">Continuer</string>
       <string id="continueresponsive">Continuer</string>
       <string id="ctrl_key">Ctrl</string>
       <string id="desktop_start">Commencer le module</string>
@@ -1544,6 +1543,7 @@
       <string id="video_transcript_select_track">Sélectionner une piste</string>
       <string id="video_transcript_title">Transcriptions</string>
       <string id="zoom_to_fit">Utiliser le zoom du navigateur</string>
+      <string id="continue">Continuer</string>
     </string_table>
   </string_tables>
   <fonts>
