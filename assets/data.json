@@ -5,6 +5,13 @@
     "linkedin": "https://www.linkedin.com/in/karimbelkacem/",
     "projects": [
         {
+            "preview": "/portfolio/images/projet/projet4.png",
+            "title": "SimGSAP",
+            "description": "Ce module interactif permet aux utilisateurs de saisir un mot, puis d’explorer sa définition et de le manipuler dans une animation dynamique. Après avoir tapé un mot, une recherche automatique récupère sa définition via une source en ligne (CNRTL). En parallèle, le mot s’anime à l’écran grâce à la bibliothèque GSAP, avec des mouvements fluides dans différentes directions. Les utilisateurs peuvent personnaliser l’expérience en temps réel : choisir la police, ajuster la vitesse d’apparition, modifier la taille, sélectionner parmi trois couleurs fixes ou revenir à une couleur aléatoire, et contrôler la direction (Haut, Bas, Gauche, Droite, ou Aléatoire). Simple et ludique, ce module mêle apprentissage et créativité visuelle",
+            "caracteristique": "Storyline360, Javascript, GSAP, HTML5",
+            "link": "https://karimbel.github.io/portfolio/simulateur-GSAP/story.html"
+        },
+        {
             "preview": "/portfolio/images/projet/projet3.png",
             "title": "Evaluer une action de formation",
             "description": "Dans ce module, le formateurs-apprenant va découvrir des méthodes et des outils pour évaluer avec précision et pertinence. Plus qu’un simple bilan, l’évaluation est un levier pour optimiser vos actions futures. Préparez-vous à explorer ce processus structuré et à en faire un atout pour votre organisation",
