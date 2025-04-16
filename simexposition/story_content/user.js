@@ -782,19 +782,15 @@ try {
     // Récupérer varExpoIndice avec valeur par défaut 0
     const expoIndice = player.GetVar("varExpoIndice") || 0;
     
-    
-    
-    
     // Effet Luminosité
-    let newExpoIndice = expoIndice;
-    console.log(`Ajustement luminosité - ExpoIndice: ${newExpoIndice}`);
+    console.log(`Ajustement luminosité - ExpoIndice: ${expoIndice}`);
 
     if (typeof gsap === "undefined") {
         console.warn("GSAP non chargé, luminosité non ajustée");
         return;
     }
 
-    let brightnessValue = 1 + (newExpoIndice / 3);
+    let brightnessValue = 1 + (expoIndice / 3);
     let elements = [
         document.querySelector("[data-acc-text='imageFinale']"),
     ].filter(Boolean);
