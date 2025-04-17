@@ -792,7 +792,8 @@ try {
 
     let brightnessValue = 1 + (expoIndice / 3);
     let elements = [
-        document.querySelector("[data-acc-text='imageFinale']"),
+        document.querySelector("[data-acc-text='imagePersonnagesFinale']"),
+        document.querySelector("[data-acc-text='imageSceneFinale']"),
     ].filter(Boolean);
 
     if (elements.length === 0) {
