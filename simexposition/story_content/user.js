@@ -15,21 +15,7 @@ var slideWidth = player.slideWidth;
 var slideHeight = player.slideHeight;
 window.Script1 = function()
 {
-  /* 
-Contexte : Simulateur d'exposition - réalisation avec Storyline 360 et Grok
-Version : 1.0
-Historique du code : création (14/04/2025)
-- Script exécuté au démarrage de la diapositive (début de la chronologie)
-- Initialisation statique des valeurs par défaut pour les curseurs
-- Initialisation de cursorLuminance et varCursEnvLuminance pour la luminance
-- Initialisation de varNiveauExpoLV pour l’indice de luminance cible
-- Initialisation de varExpoIndice pour l’indice d’exposition
-- Initialisation du flou sur imgScene à f/11 (indice 13)
-*/
-
-//console.log("Script de démarrage démarré");
-
-var player = GetPlayer();
+  var player = GetPlayer();
 
 // --- Définir les valeurs par défaut pour Distance, Focale et Luminance ---
 var cursLuminance = "Ensoleillé";
@@ -61,8 +47,70 @@ player.SetVar("varTxtParamVitesse", "1/15");
 player.SetVar("varExpoIndice", 0);
 //console.log("varExpoIndice initialisée à : " + player.GetVar("varExpoIndice"));
 
-// --- Initialisation statique au démarrage ---
+
+// effet mouvement collimateurs
 setTimeout(function() {
+	
+	var player = GetPlayer();
+	
+	// Récupérer l'élément image
+	var img = document.querySelector("[data-acc-text='imgCollimateurs']");
+	
+	// Centrer l'image vertical et horizontalement
+	img.style.position = 'absolute';
+	img.style.left = '40%';
+	img.style.top = '40%';
+	img.style.transformOrigin = 'center center';
+	img.style.transform = 'translate(-50%, -50%) rotate(0deg)';
+	
+	// Paramètres du mouvement
+	var maxRotation = 5;    // Rotation max en degrés
+	var maxTranslationX = 100; // Déplacement max en pixels (gauche/droite)
+	var maxTranslationY = 200; // Déplacement max en pixels (haut/bas)
+	var speed = 0.08;        // Vitesse du mouvement
+	
+	// Variables pour le mouvement fluide
+	var currentRot = 0;
+	var currentX = 0;
+	var currentY = 0;
+	var targetRot = 0;
+	var targetX = 0;
+	var targetY = 0;
+	
+	// Fonction pour générer une nouvelle cible aléatoire
+	function newTarget() {
+	    targetRot = (Math.random() * 2 - 1) * maxRotation;
+	    targetX = (Math.random() * 2 - 1) * maxTranslationX;
+	    targetY = (Math.random() * 2 - 1) * maxTranslationY;
+	}
+	
+	// Fonction d'animation
+	function animate() {
+	    // Interpolation douce vers la cible
+	    currentRot += (targetRot - currentRot) * speed;
+	    currentX += (targetX - currentX) * speed;
+	    currentY += (targetY - currentY) * speed;
+	    
+	    // Appliquer la translation et la rotation tout en maintenant le centrage
+	    img.style.transform = `translate(-50%, -50%) translate(${currentX}px, ${currentY}px) rotate(${currentRot}deg)`;
+	    
+	    // Générer une nouvelle cible de temps en temps
+	    if (Math.random() < 0.02) {
+	        newTarget();
+	    }
+	    
+	    // Continuer l'animation
+	    requestAnimationFrame(animate);
+	}
+	
+	// Initialiser le mouvement
+	newTarget();
+	animate();
+
+}, 100);
+
+// --- Initialisation statique au démarrage ---
+/* setTimeout(function() {
     // Initialisation du flou sur imgScene
     const imageScene = document.querySelector("[data-acc-text='zoomScene']");
     if (!imageScene) {
@@ -84,7 +132,7 @@ setTimeout(function() {
     }
 
     //console.log("Script de démarrage terminé");
-}, 100);
+}, 100); */
 }
 
 window.Script2 = function()
@@ -130,7 +178,7 @@ console.log("Script Luminosité terminé");
 
 window.Script3 = function()
 {
-  console.log("Script Ouverture (Mode Av/A) démarré");
+  console.log("Script Ouverture démarré");
 
 var player = GetPlayer();
 let isProcessing = false;
@@ -143,8 +191,33 @@ function shutterSpeedString(value) {
     return shutterValues[value] <= 4 ? (1 / shutterValues[value]).toFixed(2) + '"' : `1/${shutterValues[value]}`;
 }
 
+function getBaseValues(luminanceIndex) {
+    let baseISOIndex, baseApertureIndex, baseShutterIndex;
+    if (luminanceIndex === 2) {
+        baseISOIndex = 0; baseApertureIndex = 6; baseShutterIndex = 4;
+    } else if (luminanceIndex === 1) {
+        baseISOIndex = 0; baseApertureIndex = 4; baseShutterIndex = 1;
+    } else if (luminanceIndex === 0) {
+        baseISOIndex = 0; baseApertureIndex = 0; baseShutterIndex = 1;
+    } else {
+        console.warn("Luminance inconnue, valeur par défaut (IL 7)");
+        baseISOIndex = 0; baseApertureIndex = 4; baseShutterIndex = 1;
+    }
+    return { baseISOIndex, baseApertureIndex, baseShutterIndex };
+}
+
+function calculateExposureIndex(isoIndex, apertureIndex, shutterIndex, baseISOIndex, baseApertureIndex, baseShutterIndex) {
+    let isoStopChange = isoIndex - baseISOIndex;
+    let apertureStopChange = apertureIndex - baseApertureIndex;
+    let shutterStopChange = shutterIndex - baseShutterIndex;
+    let totalStopChange = isoStopChange + apertureStopChange + shutterStopChange;
+    return Math.max(-3, Math.min(3, totalStopChange * (1/3)));
+}
+
 try {
     // --- Vérification initiale ---
+    let modeAvA = player.GetVar("varModeActifAvA");
+    let modeM = player.GetVar("varModeActifM");
     let newApertureIndex = player.GetVar("varCursExpoOuverture");
     let lastApertureIndex = player.GetVar("lastApertureIndex") || -1;
 
@@ -158,23 +231,14 @@ try {
 
     // --- Définir les valeurs de base ---
     let luminanceIndex = player.GetVar("varCursEnvLuminance");
-    let baseISOIndex, baseApertureIndex, baseShutterIndex;
-    if (luminanceIndex === 2) {
-        baseISOIndex = 0; baseApertureIndex = 6; baseShutterIndex = 4;
-    } else if (luminanceIndex === 1) {
-        baseISOIndex = 0; baseApertureIndex = 4; baseShutterIndex = 1;
-    } else if (luminanceIndex === 0) {
-        baseISOIndex = 0; baseApertureIndex = 0; baseShutterIndex = 1;
-    } else {
-        console.warn("Luminance inconnue, valeur par défaut (IL 7)");
-        baseISOIndex = 0; baseApertureIndex = 4; baseShutterIndex = 1;
-    }
+    let { baseISOIndex, baseApertureIndex, baseShutterIndex } = getBaseValues(luminanceIndex);
 
     // --- Mettre à jour l'ouverture ---
     player.SetVar("varTxtParamOuverture", apertureValues[newApertureIndex]);
 
     // --- Ajuster les curseurs ---
-    function adjustSlidersToBalanceExposure() {
+    if (modeAvA) {
+        // Mode Av/A : Ajuster la vitesse pour compenser l'ouverture
         let apertureStopChange = newApertureIndex - baseApertureIndex;
         console.log(`Changement Ouverture : ${apertureStopChange} stop(s)`);
 
@@ -184,27 +248,36 @@ try {
         player.SetVar("varCursExpoVitesse", newShutterIndex);
         player.SetVar("varTxtParamVitesse", shutterSpeedString(newShutterIndex));
 
-        let newExpoIndice = apertureStopChange * (1/3);
-        newExpoIndice = Math.max(-3, Math.min(3, newExpoIndice));
+        // Calculer varExpoIndice en tenant compte de l'ISO (indépendant)
+        let currentISOIndex = player.GetVar("varCursExpoIso") || baseISOIndex;
+        let newExpoIndice = calculateExposureIndex(currentISOIndex, newApertureIndex, newShutterIndex, baseISOIndex, baseApertureIndex, baseShutterIndex);
         player.SetVar("varExpoIndice", newExpoIndice);
 
-        console.log(`Ajustement - ISO: ${isoValues[baseISOIndex]}, Ouverture: f/${apertureValues[newApertureIndex]}, Vitesse: ${shutterSpeedString(newShutterIndex)}, ExpoIndice: ${newExpoIndice}`);
+        console.log(`Ajustement (Av/A) - ISO: ${isoValues[currentISOIndex]}, Ouverture: f/${apertureValues[newApertureIndex]}, Vitesse: ${shutterSpeedString(newShutterIndex)}, ExpoIndice: ${newExpoIndice}`);
+    } else if (modeM) {
+        // Mode M : Pas d'ajustement automatique, mise à jour de varExpoIndice
+        let currentISOIndex = player.GetVar("varCursExpoIso") || baseISOIndex;
+        let currentShutterIndex = player.GetVar("varCursExpoVitesse") || baseShutterIndex;
+        let newExpoIndice = calculateExposureIndex(currentISOIndex, newApertureIndex, currentShutterIndex, baseISOIndex, baseApertureIndex, baseShutterIndex);
+        player.SetVar("varExpoIndice", newExpoIndice);
+
+        console.log(`Ajustement (M) - ISO: ${isoValues[currentISOIndex]}, Ouverture: f/${apertureValues[newApertureIndex]}, Vitesse: ${shutterSpeedString(currentShutterIndex)}, ExpoIndice: ${newExpoIndice}`);
+    } else {
+        console.log("Mode non supporté pour ce script (ni Av/A ni M)");
     }
 
-    // --- Exécution ---
-    adjustSlidersToBalanceExposure();
     player.SetVar("lastApertureIndex", newApertureIndex);
 } catch (error) {
     console.error("Erreur dans le script Ouverture :", error);
 } finally {
     isProcessing = false;
-    console.log("Script Ouverture (Mode Av/A) terminé");
+    console.log("Script Ouverture terminé");
 }
 }
 
 window.Script4 = function()
 {
-  console.log("Script Vitesse (Mode Tv/S) démarré");
+  console.log("Script Vitesse démarré");
 
 var player = GetPlayer();
 let isProcessing = false;
@@ -217,8 +290,33 @@ function shutterSpeedString(value) {
     return shutterValues[value] <= 4 ? (1 / shutterValues[value]).toFixed(2) + '"' : `1/${shutterValues[value]}`;
 }
 
+function getBaseValues(luminanceIndex) {
+    let baseISOIndex, baseApertureIndex, baseShutterIndex;
+    if (luminanceIndex === 2) {
+        baseISOIndex = 0; baseApertureIndex = 6; baseShutterIndex = 4;
+    } else if (luminanceIndex === 1) {
+        baseISOIndex = 0; baseApertureIndex = 4; baseShutterIndex = 1;
+    } else if (luminanceIndex === 0) {
+        baseISOIndex = 0; baseApertureIndex = 0; baseShutterIndex = 1;
+    } else {
+        console.warn("Luminance inconnue, valeur par défaut (IL 7)");
+        baseISOIndex = 0; baseApertureIndex = 4; baseShutterIndex = 1;
+    }
+    return { baseISOIndex, baseApertureIndex, baseShutterIndex };
+}
+
+function calculateExposureIndex(isoIndex, apertureIndex, shutterIndex, baseISOIndex, baseApertureIndex, baseShutterIndex) {
+    let isoStopChange = isoIndex - baseISOIndex;
+    let apertureStopChange = apertureIndex - baseApertureIndex;
+    let shutterStopChange = shutterIndex - baseShutterIndex;
+    let totalStopChange = isoStopChange + apertureStopChange + shutterStopChange;
+    return Math.max(-3, Math.min(3, totalStopChange * (1/3)));
+}
+
 try {
     // --- Vérification initiale ---
+    let modeTvS = player.GetVar("varModeActifTvS");
+    let modeM = player.GetVar("varModeActifM");
     let newShutterIndex = player.GetVar("varCursExpoVitesse");
     let lastShutterIndex = player.GetVar("lastShutterIndex") || -1;
 
@@ -232,23 +330,14 @@ try {
 
     // --- Définir les valeurs de base ---
     let luminanceIndex = player.GetVar("varCursEnvLuminance");
-    let baseISOIndex, baseApertureIndex, baseShutterIndex;
-    if (luminanceIndex === 2) {
-        baseISOIndex = 0; baseApertureIndex = 6; baseShutterIndex = 4;
-    } else if (luminanceIndex === 1) {
-        baseISOIndex = 0; baseApertureIndex = 4; baseShutterIndex = 1;
-    } else if (luminanceIndex === 0) {
-        baseISOIndex = 0; baseApertureIndex = 0; baseShutterIndex = 1;
-    } else {
-        console.warn("Luminance inconnue, valeur par défaut (IL 7)");
-        baseISOIndex = 0; baseApertureIndex = 4; baseShutterIndex = 1;
-    }
+    let { baseISOIndex, baseApertureIndex, baseShutterIndex } = getBaseValues(luminanceIndex);
 
     // --- Mettre à jour la vitesse ---
     player.SetVar("varTxtParamVitesse", shutterSpeedString(newShutterIndex));
 
     // --- Ajuster les curseurs ---
-    function adjustSlidersToBalanceExposure() {
+    if (modeTvS) {
+        // Mode Tv/S : Ajuster l'ouverture pour compenser la vitesse
         let shutterStopChange = newShutterIndex - baseShutterIndex;
         console.log(`Changement Vitesse : ${shutterStopChange} stop(s)`);
 
@@ -258,27 +347,36 @@ try {
         player.SetVar("varCursExpoOuverture", newApertureIndex);
         player.SetVar("varTxtParamOuverture", apertureValues[newApertureIndex]);
 
-        let newExpoIndice = shutterStopChange * (1/3);
-        newExpoIndice = Math.max(-3, Math.min(3, newExpoIndice));
+        // Calculer varExpoIndice en tenant compte de l'ISO (indépendant)
+        let currentISOIndex = player.GetVar("varCursExpoIso") || baseISOIndex;
+        let newExpoIndice = calculateExposureIndex(currentISOIndex, newApertureIndex, newShutterIndex, baseISOIndex, baseApertureIndex, baseShutterIndex);
         player.SetVar("varExpoIndice", newExpoIndice);
 
-        console.log(`Ajustement - ISO: ${isoValues[baseISOIndex]}, Ouverture: f/${apertureValues[newApertureIndex]}, Vitesse: ${shutterSpeedString(newShutterIndex)}, ExpoIndice: ${newExpoIndice}`);
+        console.log(`Ajustement (Tv/S) - ISO: ${isoValues[currentISOIndex]}, Ouverture: f/${apertureValues[newApertureIndex]}, Vitesse: ${shutterSpeedString(newShutterIndex)}, ExpoIndice: ${newExpoIndice}`);
+    } else if (modeM) {
+        // Mode M : Pas d'ajustement automatique, mise à jour de varExpoIndice
+        let currentISOIndex = player.GetVar("varCursExpoIso") || baseISOIndex;
+        let currentApertureIndex = player.GetVar("varCursExpoOuverture") || baseApertureIndex;
+        let newExpoIndice = calculateExposureIndex(currentISOIndex, currentApertureIndex, newShutterIndex, baseISOIndex, baseApertureIndex, baseShutterIndex);
+        player.SetVar("varExpoIndice", newExpoIndice);
+
+        console.log(`Ajustement (M) - ISO: ${isoValues[currentISOIndex]}, Ouverture: f/${apertureValues[currentApertureIndex]}, Vitesse: ${shutterSpeedString(newShutterIndex)}, ExpoIndice: ${newExpoIndice}`);
+    } else {
+        console.log("Mode non supporté pour ce script (ni Tv/S ni M)");
     }
 
-    // --- Exécution ---
-    adjustSlidersToBalanceExposure();
     player.SetVar("lastShutterIndex", newShutterIndex);
 } catch (error) {
     console.error("Erreur dans le script Vitesse :", error);
 } finally {
     isProcessing = false;
-    console.log("Script Vitesse (Mode Tv/S) terminé");
+    console.log("Script Vitesse terminé");
 }
 }
 
 window.Script5 = function()
 {
-  console.log("Script ISO (Mode P) démarré");
+  console.log("Script ISO démarré");
 
 var player = GetPlayer();
 let isProcessing = false;
@@ -291,8 +389,35 @@ function shutterSpeedString(value) {
     return shutterValues[value] <= 4 ? (1 / shutterValues[value]).toFixed(2) + '"' : `1/${shutterValues[value]}`;
 }
 
+function getBaseValues(luminanceIndex) {
+    let baseISOIndex, baseApertureIndex, baseShutterIndex;
+    if (luminanceIndex === 2) {
+        baseISOIndex = 0; baseApertureIndex = 6; baseShutterIndex = 4;
+    } else if (luminanceIndex === 1) {
+        baseISOIndex = 0; baseApertureIndex = 4; baseShutterIndex = 1;
+    } else if (luminanceIndex === 0) {
+        baseISOIndex = 0; baseApertureIndex = 0; baseShutterIndex = 1;
+    } else {
+        console.warn("Luminance inconnue, valeur par défaut (IL 7)");
+        baseISOIndex = 0; baseApertureIndex = 4; baseShutterIndex = 1;
+    }
+    return { baseISOIndex, baseApertureIndex, baseShutterIndex };
+}
+
+function calculateExposureIndex(isoIndex, apertureIndex, shutterIndex, baseISOIndex, baseApertureIndex, baseShutterIndex) {
+    let isoStopChange = isoIndex - baseISOIndex;
+    let apertureStopChange = apertureIndex - baseApertureIndex;
+    let shutterStopChange = shutterIndex - baseShutterIndex;
+    let totalStopChange = isoStopChange + apertureStopChange + shutterStopChange;
+    return Math.max(-3, Math.min(3, totalStopChange * (1/3)));
+}
+
 try {
     // --- Vérification initiale ---
+    let modeP = player.GetVar("varModeActifP");
+    let modeAvA = player.GetVar("varModeActifAvA");
+    let modeTvS = player.GetVar("varModeActifTvS");
+    let modeM = player.GetVar("varModeActifM");
     let newISOIndex = player.GetVar("varCursExpoIso");
     let lastISOIndex = player.GetVar("lastISOIndex") || -1;
 
@@ -306,69 +431,63 @@ try {
 
     // --- Définir les valeurs de base ---
     let luminanceIndex = player.GetVar("varCursEnvLuminance");
-    let baseISOIndex, baseApertureIndex, baseShutterIndex;
-    if (luminanceIndex === 2) {
-        baseISOIndex = 0; baseApertureIndex = 6; baseShutterIndex = 4;
-    } else if (luminanceIndex === 1) {
-        baseISOIndex = 0; baseApertureIndex = 4; baseShutterIndex = 1;
-    } else if (luminanceIndex === 0) {
-        baseISOIndex = 0; baseApertureIndex = 0; baseShutterIndex = 1;
-    } else {
-        console.warn("Luminance inconnue, valeur par défaut (IL 7)");
-        baseISOIndex = 0; baseApertureIndex = 4; baseShutterIndex = 1;
-    }
+    let { baseISOIndex, baseApertureIndex, baseShutterIndex } = getBaseValues(luminanceIndex);
 
     // --- Mettre à jour l'ISO ---
     player.SetVar("varTxtParamIso", isoValues[newISOIndex]);
 
     // --- Ajuster les curseurs ---
-    function adjustSlidersToBalanceExposure() {
+    if (modeP) {
+        // Mode P : Ajuster ouverture et vitesse pour compenser l'ISO
         let isoStopChange = newISOIndex - baseISOIndex;
         console.log(`Changement ISO : ${isoStopChange} stop(s)`);
 
-        // Répartir le changement entre ouverture et vitesse
-        let apertureStopChange = Math.round(isoStopChange / 2); // Moitié pour l'ouverture
-        let shutterStopChange = isoStopChange - apertureStopChange; // Reste pour la vitesse
+        let apertureStopChange = Math.round(isoStopChange / 2);
+        let shutterStopChange = isoStopChange - apertureStopChange;
 
         let newApertureIndex = baseApertureIndex - apertureStopChange;
         let newShutterIndex = baseShutterIndex - shutterStopChange;
 
-        // Ajuster si hors limites
         if (newShutterIndex < 0 || newShutterIndex > 12) {
             let excess = newShutterIndex < 0 ? newShutterIndex : newShutterIndex - 12;
-            newApertureIndex -= excess; // Transférer l'excès à l'ouverture
+            newApertureIndex -= excess;
             newShutterIndex = Math.max(0, Math.min(12, newShutterIndex));
         } else if (newApertureIndex < 0 || newApertureIndex > 8) {
             let excess = newApertureIndex < 0 ? newApertureIndex : newApertureIndex - 8;
-            newShutterIndex -= excess; // Transférer l'excès à la vitesse
+            newShutterIndex -= excess;
             newApertureIndex = Math.max(0, Math.min(8, newApertureIndex));
         }
 
-        // Assurer que les indices restent dans les bornes
         newApertureIndex = Math.max(0, Math.min(8, newApertureIndex));
         newShutterIndex = Math.max(0, Math.min(12, newShutterIndex));
 
-        // Mettre à jour les variables Storyline
         player.SetVar("varCursExpoOuverture", newApertureIndex);
         player.SetVar("varTxtParamOuverture", apertureValues[newApertureIndex]);
         player.SetVar("varCursExpoVitesse", newShutterIndex);
         player.SetVar("varTxtParamVitesse", shutterSpeedString(newShutterIndex));
 
-        let newExpoIndice = isoStopChange * (1/3);
-        newExpoIndice = Math.max(-3, Math.min(3, newExpoIndice));
+        let newExpoIndice = calculateExposureIndex(newISOIndex, newApertureIndex, newShutterIndex, baseISOIndex, baseApertureIndex, baseShutterIndex);
         player.SetVar("varExpoIndice", newExpoIndice);
 
-        console.log(`Ajustement - ISO: ${isoValues[newISOIndex]}, Ouverture: f/${apertureValues[newApertureIndex]}, Vitesse: ${shutterSpeedString(newShutterIndex)}, ExpoIndice: ${newExpoIndice}`);
+        console.log(`Ajustement (P) - ISO: ${isoValues[newISOIndex]}, Ouverture: f/${apertureValues[newApertureIndex]}, Vitesse: ${shutterSpeedString(newShutterIndex)}, ExpoIndice: ${newExpoIndice}`);
+    } else if (modeAvA || modeTvS || modeM) {
+        // Modes Av/A, Tv/S, M : ISO indépendant, mise à jour de varExpoIndice
+        let currentApertureIndex = player.GetVar("varCursExpoOuverture") || baseApertureIndex;
+        let currentShutterIndex = player.GetVar("varCursExpoVitesse") || baseShutterIndex;
+        let newExpoIndice = calculateExposureIndex(newISOIndex, currentApertureIndex, currentShutterIndex, baseISOIndex, baseApertureIndex, baseShutterIndex);
+        player.SetVar("varExpoIndice", newExpoIndice);
+
+        console.log(`Ajustement (${modeAvA ? 'Av/A' : modeTvS ? 'Tv/S' : 'M'}) - ISO: ${isoValues[newISOIndex]}, Ouverture: f/${apertureValues[currentApertureIndex]}, Vitesse: ${shutterSpeedString(currentShutterIndex)}, ExpoIndice: ${newExpoIndice}`);
+    } else {
+        console.log("Mode non supporté pour ce script");
     }
 
-    // --- Exécution ---
-    adjustSlidersToBalanceExposure();
     player.SetVar("lastISOIndex", newISOIndex);
 } catch (error) {
     console.error("Erreur dans le script ISO :", error);
 } finally {
     isProcessing = false;
-    console.log("Script ISO (Mode P) terminé");
+    console.log("Script ISO terminé");
 }
 }
 
@@ -778,86 +897,224 @@ window.Script9 = function()
   var player = GetPlayer();
 
 try {
-	
-    // Récupérer varExpoIndice avec valeur par défaut 0
-    const expoIndice = player.GetVar("varExpoIndice") || 0;
-    
-    // Effet Luminosité
-    console.log(`Ajustement luminosité - ExpoIndice: ${expoIndice}`);
+    // Récupérer les références via object() (pour vérification)
+    const bgCadrageObj = object('5ZIMmRa2j16');
+    const imgSceneFinale0Obj = object('5bPf5yelbju');
+    const imgSceneFinale1Obj = object('5wC1iVszQIa');
+    const imgSceneFinale2Obj = object('5cOIqKnIoyZ');
+    const imgPersonnagesFinaleObj = object('632oSl2PANf');
 
-    if (typeof gsap === "undefined") {
-        console.warn("GSAP non chargé, luminosité non ajustée");
-        return;
+// Vérifier que les références existent
+// Hypothèse : object(id) retourne des références Storyline, mais on utilise data-acc-text pour le DOM
+if (!bgCadrageObj || !imgSceneFinale0Obj || !imgSceneFinale1Obj || !imgSceneFinale2Obj || !imgPersonnagesFinaleObj) {
+    console.warn("Une ou plusieurs références object() non trouvées");
+    return;
+}
+
+// Injecter les styles CSS dynamiquement
+// Hypothèse : Les éléments sont des <div> existants, on applique background-image
+// TODO : Remplacer l'URL placeholder pour bgCadrage par l'URL réelle, ex. https://raw.githubusercontent.com/karimbel/portfolio/main/simexposition/mobile/5ZIMmRa2j16.png
+const styleSheet = document.createElement("style");
+styleSheet.type = "text/css";
+styleSheet.innerText = `
+    [data-acc-text='bgCadrage'] {
+        width: 497px; /* Forcé à 497px × 395px, ajustez à 757.465px × 602.009px si nécessaire */
+        height: 395px;
+        background-image: url('https://placehold.co/497x395/blue/white?text=SceneBackground'); /* Remplacer par l'URL de l'image bgCadrage */
+        background-size: 100% 100%;
+        background-position: 50% 50%;
+        background-repeat: no-repeat;
+        position: relative;
+        overflow: hidden;
+        z-index: 3; /* Conserver l'ordre de Storyline */
     }
+    [data-acc-text='imageSceneFinale0'],
+    [data-acc-text='imageSceneFinale1'],
+    [data-acc-text='imageSceneFinale2'],
+    [data-acc-text='imagePersonnagesFinale'] {
+        width: 497px;
+        height: 395px;
+        background-size: 100% 100%;
+        background-position: 50% 50%;
+        background-repeat: no-repeat;
+        /* Commenter les lignes suivantes si vous ne voulez pas modifier le positionnement Storyline */
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+    [data-acc-text='imageSceneFinale0'] {
+        background-image: url('https://raw.githubusercontent.com/karimbel/portfolio/main/simexposition/mobile/5tP7Bg7RSZc.png');
+        opacity: 0.7;
+        z-index: 4;
+    }
+    [data-acc-text='imageSceneFinale1'] {
+        background-image: url('https://raw.githubusercontent.com/karimbel/portfolio/main/simexposition/mobile/5yICyp9nNwh.png');
+        opacity: 0.7;
+        z-index: 5;
+    }
+    [data-acc-text='imageSceneFinale2'] {
+        background-image: url('https://raw.githubusercontent.com/karimbel/portfolio/main/simexposition/mobile/6OYrQ3sxQaE.png');
+        opacity: 0.7;
+        z-index: 6;
+    }
+    [data-acc-text='imagePersonnagesFinale'] {
+        background-image: url('https://raw.githubusercontent.com/karimbel/portfolio/main/simexposition/mobile/6OOMmlhsZRi.png');
+        opacity: 0.7;
+        z-index: 7;
+    }
+`;
+document.head.appendChild(styleSheet);
 
-    let brightnessValue = 1 + (expoIndice / 3);
-    let elements = [
+// Sélectionner les éléments
+// Hypothèse : Les <div> avec data-acc-text existent et correspondent aux data-model-id
+const elements = {
+    scene: [
         document.querySelector("[data-acc-text='imageSceneFinale0']"),
         document.querySelector("[data-acc-text='imageSceneFinale1']"),
-        document.querySelector("[data-acc-text='imageSceneFinale2']"),
-        document.querySelector("[data-acc-text='imagePersonnagesFinale']"),
-         
-    ].filter(Boolean);
+        document.querySelector("[data-acc-text='imageSceneFinale2']")
+    ].filter(Boolean),
+    personnages: document.querySelector("[data-acc-text='imagePersonnagesFinale']"),
+    bgCadrage: document.querySelector("[data-acc-text='bgCadrage']")
+};
 
-    if (elements.length === 0) {
-        console.warn("Aucune image trouvée pour l'animation");
-        return;
+// Vérifier la présence des éléments
+if (elements.scene.length === 0 && !elements.personnages) {
+    console.warn("Aucune image trouvée pour l'animation");
+    return;
+}
+if (!elements.bgCadrage) {
+    console.warn("Rectangle bgCadrage non trouvé");
+    return;
+}
+
+// Option 1 : Faire des éléments des enfants de bgCadrage pour superposition
+// Hypothèse : Imiter l'exemple HTML5 en déplaçant les <div> dans bgCadrage
+// Note : Cela peut perturber le positionnement Storyline (transform: translate(223px, 110px))
+/*
+elements.scene.forEach(scene => {
+    if (scene && scene.parentElement !== elements.bgCadrage) {
+        elements.bgCadrage.appendChild(scene);
     }
+});
+if (elements.personnages && elements.personnages.parentElement !== elements.bgCadrage) {
+    elements.bgCadrage.appendChild(elements.personnages);
+}
+*/
 
-    gsap.to(elements, {
+// Option 2 : Conserver la structure DOM existante
+// Appliquer les background-image et le zoom sans modifier la hiérarchie
+
+// Récupérer et valider les variables
+const expoIndice = Math.max(-2, Math.min(2, player.GetVar("varExpoIndice") || 0)); // Plage -2 à 2
+const focalIndex = Math.max(0, Math.min(3, player.GetVar("varCursEnvFocale") || 0)); // Plage 0 à 3
+const luminance = Math.max(0, Math.min(2, parseInt(player.GetVar("varCursEnvLuminance")) || 0)); // Plage 0 à 2
+const distanceIndex = Math.max(0, Math.min(2, player.GetVar("varCursEnvDistance") || 2)); // Plage 0 à 2
+
+// Vérifier GSAP
+if (typeof gsap === "undefined") {
+    console.warn("GSAP non chargé, aucune animation appliquée");
+    return;
+}
+
+// Fonction pour appliquer les effets (luminosité et zoom)
+const applyEffects = () => {
+    // Effet Luminosité
+    const brightnessValue = 1 + (expoIndice / 3);
+    const allElements = [...elements.scene, elements.personnages, elements.bgCadrage].filter(Boolean);
+    gsap.to(allElements, {
         duration: 0.3,
         filter: `brightness(${brightnessValue})`,
         ease: "power2.out",
-        onStart: () => elements.forEach(el => el.style.visibility = "visible"),
+        onStart: () => allElements.forEach(el => el.style.visibility = "visible")
     });
-    console.log(`Luminosité ajustée à ${brightnessValue}`);
-    
-    
-    
-    
-    
-	// Définir le texte selon les plages d'exposition
-	const statusTextExpo = 
-		expoIndice === -2 ? "Image fortement sous-exposée, très sombre, détails dans les ombres perdus. Conseils : augmentez l'ISO (ex. de 100 à 400), ouvrez l'ouverture (ex. de f/8 à f/4), ou ralentissez la vitesse (ex. de 1/500s à 1/125s)." :
-	    expoIndice >= -1.99 && expoIndice <= -1.51 ? "Image nettement sous-exposée, sombre, avec des ombres denses. Conseils : passez à un ISO plus élevé (ex. de 200 à 800), utilisez une ouverture plus large (ex. de f/5.6 à f/2.8), ou prolongez la vitesse (ex. de 1/250s à 1/60s)." :
-	    expoIndice >= -1.50 && expoIndice <= -1.1 ? "Image sous-exposée, plus sombre que la normale, détails dans les ombres réduits. Conseils : augmentez légèrement l'ISO (ex. de 100 à 200), ouvrez un peu l'ouverture (ex. de f/8 à f/5.6), ou ralentissez la vitesse (ex. de 1/500s à 1/250s)." :
-	    expoIndice === -1 ? "Image légèrement sous-exposée, un peu sombre, mais détails encore visibles. Conseils : essayez un ISO un peu plus élevé (ex. de 100 à 200), une ouverture légèrement plus grande (ex. de f/5.6 à f/4), ou une vitesse plus lente (ex. de 1/250s à 1/125s)." :
-	    expoIndice >= -0.99 && expoIndice <= -0.51 ? "Image subtilement sous-exposée, légèrement plus sombre, exposition presque correcte. Conseils : ajustez finement l'ISO (ex. de 100 à 150), ouvrez légèrement l'ouverture (ex. de f/5.6 à f/4.5), ou ralentissez un peu la vitesse (ex. de 1/250s à 1/200s)." :
-	    expoIndice >= -0.50 && expoIndice <= -0.1 ? "Image à peine sous-exposée, très proche de l'exposition correcte. Conseils : un léger réglage suffit, comme augmenter l'ISO de 100 à 125, ouvrir de f/5.6 à f/5, ou passer de 1/250s à 1/200s." :
-	    expoIndice === 0 ? "Exposition correcte, image équilibrée avec des tons naturels. Conseils : maintenez ces paramètres ou ajustez légèrement l'ISO, l'ouverture, ou la vitesse pour un effet créatif (ex. ISO 100, f/5.6, 1/250s)." :
-	    expoIndice >= 0.1 && expoIndice <= 0.50 ? "Image à peine surexposée, très légèrement plus claire. Conseils : un léger réglage suffit, comme réduire l'ISO de 200 à 100, fermer de f/5 à f/5.6, ou passer de 1/200s à 1/250s." :
-	    expoIndice >= 0.51 && expoIndice <= 0.99 ? "Image subtilement surexposée, un peu plus claire, presque correcte. Conseils : diminuez légèrement l'ISO (ex. de 200 à 150), fermez un peu l'ouverture (ex. de f/4.5 à f/5.6), ou accélérez la vitesse (ex. de 1/200s à 1/250s)." :
-	    expoIndice === 1 ? "Image légèrement surexposée, plus claire, détails dans les hautes lumières réduits. Conseils : réduisez l'ISO (ex. de 200 à 100), fermez l'ouverture (ex. de f/4 à f/5.6), ou augmentez la vitesse (ex. de 1/125s à 1/250s)." :
-	    expoIndice >= 1.1 && expoIndice <= 1.50 ? "Image surexposée, plus lumineuse, perte de détails dans les zones claires. Conseils : baissez l'ISO (ex. de 400 à 200), utilisez une ouverture plus petite (ex. de f/4 à f/8), ou accélérez la vitesse (ex. de 1/60s à 1/250s)." :
-	    expoIndice >= 1.51 && expoIndice <= 1.99 ? "Image nettement surexposée, très lumineuse, hautes lumières écrasées. Conseils : réduisez fortement l'ISO (ex. de 800 à 200), fermez l'ouverture (ex. de f/2.8 à f/8), ou passez à une vitesse rapide (ex. de 1/60s à 1/500s)." :
-	    expoIndice === 2 ? "Image fortement surexposée, très claire, détails dans les hautes lumières perdus. Conseils : diminuez l'ISO au minimum (ex. de 800 à 100), fermez au maximum l'ouverture (ex. de f/2.8 à f/11), ou utilisez une vitesse très rapide (ex. de 1/60s à 1/1000s)." :
-	    "Valeur d'exposition hors plage. Conseils : vérifiez vos paramètres ISO, ouverture, et vitesse, et ajustez vers ISO 100, f/5.6, 1/250s pour un point de départ neutre.";
+    console.log(`Luminosité ajustée à ${brightnessValue} (expoIndice=${expoIndice})`);
 
-    // Mettre à jour la variable Storyline
-    player.SetVar("varTxtExpoStatus", statusTextExpo);
-    console.log(`Statut exposition : ${statusTextExpo} (varExpoIndice=${expoIndice})`);
-    
-    
-    
-	// Récupérer varLuminance avec valeur par défaut 0
-	const luminance = parseInt(player.GetVar("varCursEnvLuminance")) || 0;
-	
-	// Définir le texte selon les conditions de luminance
-	const statusTextLuminance = 
-	    luminance === 0 ? "Condition orageuse, lumière très faible, ambiance sombre et contrastes élevés." :
-	    luminance === 1 ? "Condition nuageuse, lumière diffuse, tons doux et détails équilibrés." :
-	    luminance === 2 ? "Condition ensoleillée, lumière vive, couleurs éclatantes et ombres marquées." :
-	    "Condition de luminance inconnue";
-	    
-    // Mettre à jour la variable Storyline
-    player.SetVar("varTxtLuminanceStatus", statusTextLuminance);
-    console.log(`Statut exposition : ${statusTextLuminance} (varCursEnvLuminance=${luminance})`);
+    // Focale - Zoom
+    console.log(`Script zoom démarré (focalIndex=${focalIndex}, distanceIndex=${distanceIndex})`);
 
+    // Définir les échelles pour le zoom
+    const sceneScale = [1, 1.1, 1.3, 1.5][focalIndex];
+    let persoScale = [1, 1.25, 1.5, 2][focalIndex];
+    if (focalIndex === 3) {
+        persoScale = [1.8, 1.4, 2][distanceIndex]; // Ajustement selon distanceIndex
+    }
+
+    // Appliquer le zoom au background de bgCadrage
+    gsap.to(elements.bgCadrage, {
+        backgroundSize: `${sceneScale * 100}% ${sceneScale * 100}%`,
+        backgroundPosition: "50% 50%",
+        duration: 0.5,
+        ease: "power1.inOut"
+    });
+
+    // Appliquer le zoom aux scènes
+    elements.scene.forEach(scene => {
+        gsap.to(scene, {
+            backgroundSize: `${sceneScale * 100}% ${sceneScale * 100}%`,
+            backgroundPosition: "50% 50%",
+            duration: 0.5,
+            ease: "power1.inOut"
+        });
+    });
+
+    // Appliquer le zoom à personnages
+    if (elements.personnages) {
+        gsap.to(elements.personnages, {
+            backgroundSize: `${persoScale * 100}% ${persoScale * 100}%`,
+            backgroundPosition: "50% 50%",
+            duration: 0.5,
+            ease: "power1.inOut"
+        });
+    }
+
+    console.log(`Zoom appliqué - Scene: ${sceneScale}, Personnages: ${persoScale}`);
+};
+
+// Appliquer les effets au démarrage
+applyEffects();
+
+// Réappliquer les effets lors du redimensionnement
+let resizeTimeout;
+window.addEventListener("resize", () => {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(applyEffects, 100); // Debounce pour limiter les appels
+});
+
+// Messages d'exposition
+const statusTextExpo = 
+    expoIndice === -2 ? "Image fortement sous-exposée, très sombre, détails dans les ombres perdus. Conseils : augmentez l'ISO (ex. de 100 à 400), ouvrez l'ouverture (ex. de f/8 à f/4), ou ralentissez la vitesse (ex. de 1/500s à 1/125s)." :
+    expoIndice >= -1.99 && expoIndice <= -1.51 ? "Image nettement sous-exposée, sombre, avec des ombres denses. Conseils : passez à un ISO plus élevé (ex. de 200 à 800), utilisez une ouverture plus large (ex. de f/5.6 à f/2.8), ou prolongez la vitesse (ex. de 1/250s à 1/60s)." :
+    expoIndice >= -1.50 && expoIndice <= -1.1 ? "Image sous-exposée, plus sombre que la normale, détails dans les ombres réduits. Conseils : augmentez légèrement l'ISO (ex. de 100 à 200), ouvrez un peu l'ouverture (ex. de f/8 à f/5.6), ou ralentissez la vitesse (ex. de 1/500s à 1/250s)." :
+    expoIndice === -1 ? "Image légèrement sous-exposée, un peu sombre, mais détails encore visibles. Conseils : essayez un ISO un peu plus élevé (ex. de 100 à 200), une ouverture légèrement plus grande (ex. de f/5.6 à f/4), ou une vitesse plus lente (ex. de 1/250s à 1/125s)." :
+    expoIndice >= -0.99 && expoIndice <= -0.51 ? "Image subtilement sous-exposée, légèrement plus sombre, exposition presque correcte. Conseils : ajustez finement l'ISO (ex. de 100 à 150), ouvrez légèrement l'ouverture (ex. de f/5.6 à f/4.5), ou ralentissez un peu la vitesse (ex. de 1/250s à 1/200s)." :
+    expoIndice >= -0.50 && expoIndice <= -0.1 ? "Image à peine sous-exposée, très proche de l'exposition correcte. Conseils : un léger réglage suffit, comme augmenter l'ISO de 100 à 125, ouvrir de f/5.6 à f/5, ou passer de 1/250s à 1/200s." :
+    expoIndice === 0 ? "Exposition correcte, image équilibrée avec des tons naturels. Conseils : maintenez ces paramètres ou ajustez légèrement l'ISO, l'ouverture, ou la vitesse pour un effet créatif (ex. ISO 100, f/5.6, 1/250s)." :
+    expoIndice >= 0.1 && expoIndice <= 0.50 ? "Image à peine surexposée, très légèrement plus claire. Conseils : un léger réglage suffit, comme réduire l'ISO de 200 à 100, fermer de f/5 à f/5.6, ou passer de 1/200s à 1/250s." :
+    expoIndice >= 0.51 && expoIndice <= 0.99 ? "Image subtilement surexposée, un peu plus claire, presque correcte. Conseils : diminuez légèrement l'ISO (ex. de 200 à 150), fermez un peu l'ouverture (ex. de f/4.5 à f/5.6), ou accélérez la vitesse (ex. de 1/200s à 1/250s)." :
+    expoIndice === 1 ? "Image légèrement surexposée, plus claire, détails dans les hautes lumières réduits. Conseils : réduisez l'ISO (ex. de 200 à 100), fermez l'ouverture (ex. de f/4 à f/5.6), ou augmentez la vitesse (ex. de 1/125s à 1/250s)." :
+    expoIndice >= 1.1 && expoIndice <= 1.50 ? "Image surexposée, plus lumineuse, perte de détails dans les zones claires. Conseils : baissez l'ISO (ex. de 400 à 200), utilisez une ouverture plus petite (ex. de f/4 à f/8), ou accélérez la vitesse (ex. de 1/60s à 1/250s)." :
+    expoIndice >= 1.51 && expoIndice <= 1.99 ? "Image nettement surexposée, très lumineuse, hautes lumières écrasées. Conseils : réduisez fortement l'ISO (ex. de 800 à 200), fermez l'ouverture (ex. de f/2.8 à f/8), ou passez à une vitesse rapide (ex. de 1/60s à 1/500s)." :
+    expoIndice === 2 ? "Image fortement surexposée, très claire, détails dans les hautes lumières perdus. Conseils : diminuez l'ISO au minimum (ex. de 800 à 100), fermez au maximum l'ouverture (ex. de f/2.8 à f/11), ou utilisez une vitesse très rapide (ex. de 1/60s à 1/1000s)." :
+    "Valeur d'exposition hors plage. Conseils : vérifiez vos paramètres ISO, ouverture, et vitesse, et ajustez vers ISO 100, f/5.6, 1/250s pour un point de départ neutre.";
+
+player.SetVar("varTxtExpoStatus", statusTextExpo);
+console.log(`Statut exposition : ${statusTextExpo} (varExpoIndice=${expoIndice})`);
+
+// Messages de luminance
+const statusTextLuminance = 
+    luminance === 0 ? "Condition orageuse, lumière très faible, ambiance sombre et contrastes élevés." :
+    luminance === 1 ? "Condition nuageuse, lumière diffuse, tons doux et détails équilibrés." :
+    luminance === 2 ? "Condition ensoleillée, lumière vive, couleurs éclatantes et ombres marquées." :
+    "Condition de luminance inconnue";
+
+player.SetVar("varTxtLuminanceStatus", statusTextLuminance);
+console.log(`Statut luminance : ${statusTextLuminance} (varCursEnvLuminance=${luminance})`);
 
 } catch (error) {
-    console.error("Erreur script exposition :", error.message);
-    console.error("Erreur dans le script Luminosité :", error);
+    console.error("Erreur dans le script :", error.message);
 }
+
+
 }
 
 };
