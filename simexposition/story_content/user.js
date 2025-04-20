@@ -51,10 +51,10 @@ player.SetVar("varExpoIndice", 0);
 // Définir l'image de luminance en fonction du curseur de luminance
 let imgScene;
 switch (choixLuminance) {
-	case 1: imgScene = "https://raw.githubusercontent.com/karimbel/portfolio/main/simexposition/mobile/5tP7Bg7RSZc.png"; break;
-	case 2: imgScene = "https://raw.githubusercontent.com/karimbel/portfolio/main/simexposition/mobile/5yICyp9nNwh.png"; break;
-	case 3: imgScene = "https://raw.githubusercontent.com/karimbel/portfolio/main/simexposition/mobile/6OYrQ3sxQaE.png"; break;
-	default: imgScene = "https://raw.githubusercontent.com/karimbel/portfolio/main/simexposition/mobile/6OYrQ3sxQaE.png";
+	case 1: imgScene = "https://raw.githubusercontent.com/karimbel/portfolio/main/simexposition/mobile/5o0KJav7WFE.png"; break;
+	case 2: imgScene = "https://raw.githubusercontent.com/karimbel/portfolio/main/simexposition/mobile/5laLDcmDpCa.png"; break;
+	case 3: imgScene = "https://raw.githubusercontent.com/karimbel/portfolio/main/simexposition/mobile/5cKFk3uz4TU.png"; break;
+	default: imgScene = "https://raw.githubusercontent.com/karimbel/portfolio/main/simexposition/mobile/5cKFk3uz4TU.png";
 }
 
 // Injecter les styles CSS dynamiquement
@@ -75,7 +75,7 @@ styleSheet.innerText = `
         background-image: url('`+ imgScene +`');
     }
     [data-acc-text='imgPersonnages'] {
-        background-image: url('https://raw.githubusercontent.com/karimbel/portfolio/main/simexposition/mobile/6OOMmlhsZRi.png');
+        background-image: url('https://raw.githubusercontent.com/karimbel/portfolio/main/simexposition/mobile/5pu0seQFKfr.png');
     }
 `;
 document.head.appendChild(styleSheet);
@@ -515,22 +515,22 @@ setTimeout(function() {
     switch (luminance) {
         case 1:
             setLuminance = {
-                bgImageScene: "https://raw.githubusercontent.com/karimbel/portfolio/main/simexposition/mobile/5tP7Bg7RSZc.png"
+                bgImageScene: "https://raw.githubusercontent.com/karimbel/portfolio/main/simexposition/mobile/5o0KJav7WFE.png"
             };
             break;
         case 2:
             setLuminance = {
-                bgImageScene: "https://raw.githubusercontent.com/karimbel/portfolio/main/simexposition/mobile/5yICyp9nNwh.png"
+                bgImageScene: "https://raw.githubusercontent.com/karimbel/portfolio/main/simexposition/mobile/5laLDcmDpCa.png"
             };
             break;
         case 3:
             setLuminance = {
-                bgImageScene: "https://raw.githubusercontent.com/karimbel/portfolio/main/simexposition/mobile/6OYrQ3sxQaE.png"
+                bgImageScene: "https://raw.githubusercontent.com/karimbel/portfolio/main/simexposition/mobile/5cKFk3uz4TU.png"
             };
             break;
         default:
             setLuminance = {
-                bgImageScene: "https://raw.githubusercontent.com/karimbel/portfolio/main/simexposition/mobile/6OYrQ3sxQaE.png"
+                bgImageScene: "https://raw.githubusercontent.com/karimbel/portfolio/main/simexposition/mobile/5cKFk3uz4TU.png"
             };
             break;
     }
@@ -633,7 +633,7 @@ setTimeout(function() {
             filter: ${settingsFocale.filterBlur};
         }
         [data-acc-text='imgPersonnages'] {
-            background-image: url('https://raw.githubusercontent.com/karimbel/portfolio/main/simexposition/mobile/6OOMmlhsZRi.png');
+            background-image: url('https://raw.githubusercontent.com/karimbel/portfolio/main/simexposition/mobile/5pu0seQFKfr.png');
             background-size: ${settingsDistance.bgSizePersonnage};
             background-position: 50% 50%; /* Centré verticalement, comme distance */
             filter: blur(0px) contrast(100%);
@@ -661,22 +661,22 @@ setTimeout(function() {
     switch (luminance) {
         case 1:
             setLuminance = {
-                bgImageScene: "https://raw.githubusercontent.com/karimbel/portfolio/main/simexposition/mobile/5tP7Bg7RSZc.png"
+                bgImageScene: "https://raw.githubusercontent.com/karimbel/portfolio/main/simexposition/mobile/5o0KJav7WFE.png"
             };
             break;
         case 2:
             setLuminance = {
-                bgImageScene: "https://raw.githubusercontent.com/karimbel/portfolio/main/simexposition/mobile/5yICyp9nNwh.png"
+                bgImageScene: "https://raw.githubusercontent.com/karimbel/portfolio/main/simexposition/mobile/5laLDcmDpCa.png"
             };
             break;
         case 3:
             setLuminance = {
-                bgImageScene: "https://raw.githubusercontent.com/karimbel/portfolio/main/simexposition/mobile/6OYrQ3sxQaE.png"
+                bgImageScene: "https://raw.githubusercontent.com/karimbel/portfolio/main/simexposition/mobile/5cKFk3uz4TU.png"
             };
             break;
         default:
             setLuminance = {
-                bgImageScene: "https://raw.githubusercontent.com/karimbel/portfolio/main/simexposition/mobile/6OYrQ3sxQaE.png"
+                bgImageScene: "https://raw.githubusercontent.com/karimbel/portfolio/main/simexposition/mobile/5cKFk3uz4TU.png"
             };
             break;
     }
@@ -781,7 +781,7 @@ setTimeout(function() {
             filter: ${settingsFocale.filterBlur};
         }
         [data-acc-text='imgPersonnages'] {
-            background-image: url('https://raw.githubusercontent.com/karimbel/portfolio/main/simexposition/mobile/6OOMmlhsZRi.png');
+            background-image: url('https://raw.githubusercontent.com/karimbel/portfolio/main/simexposition/mobile/5pu0seQFKfr.png');
             background-size: ${settingsDistance.bgSizePersonnage};
             background-position: 50% 50%; /* Centré verticalement, comme demandé */
             filter: blur(0px) contrast(100%);
@@ -801,9 +801,9 @@ window.Script8 = function()
 const luminanceValues = [null, "orageux", "nuageux", "ensoleillé"];
 const luminanceILValues = [3, 7, 11]; // IL pour chaque luminance
 const imageUrls = [
-    "https://raw.githubusercontent.com/karimbel/portfolio/main/simexposition/mobile/5tP7Bg7RSZc.png", // Orageux
-    "https://raw.githubusercontent.com/karimbel/portfolio/main/simexposition/mobile/5yICyp9nNwh.png", // Nuageux
-    "https://raw.githubusercontent.com/karimbel/portfolio/main/simexposition/mobile/6OYrQ3sxQaE.png"  // Ensoleillé
+    "https://raw.githubusercontent.com/karimbel/portfolio/main/simexposition/mobile/5o0KJav7WFE.png", // Orageux
+    "https://raw.githubusercontent.com/karimbel/portfolio/main/simexposition/mobile/5laLDcmDpCa.png", // Nuageux
+    "https://raw.githubusercontent.com/karimbel/portfolio/main/simexposition/mobile/5cKFk3uz4TU.png"  // Ensoleillé
 ];
 
 // --- Précharger les images ---
