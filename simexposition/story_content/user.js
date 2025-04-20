@@ -89,16 +89,16 @@ setTimeout(function() {
 	
 	// Centrer l'image vertical et horizontalement
 	img.style.position = 'absolute';
-	img.style.left = '40%';
+	img.style.left = '48%';
 	img.style.top = '40%';
 	img.style.transformOrigin = 'center center';
 	img.style.transform = 'translate(-50%, -50%) rotate(0deg)';
 	
 	// Paramètres du mouvement
-	var maxRotation = 5;    // Rotation max en degrés
-	var maxTranslationX = 100; // Déplacement max en pixels (gauche/droite)
-	var maxTranslationY = 200; // Déplacement max en pixels (haut/bas)
-	var speed = 0.08;        // Vitesse du mouvement
+	var maxRotation = 0;    // Rotation max en degrés
+	var maxTranslationX = 150; // Déplacement max en pixels (gauche/droite)
+	var maxTranslationY = 0; // Déplacement max en pixels (haut/bas)
+	var speed = 0.05;        // Vitesse du mouvement
 	
 	// Variables pour le mouvement fluide
 	var currentRot = 0;
@@ -901,123 +901,200 @@ setTimeout(function() {
 
 window.Script9 = function()
 {
-  // Récupérer le player Storyline
-var player = GetPlayer();
-
-// Récupérer les variables Storyline avec des valeurs par défaut
-let expoIndice = player.GetVar("varExpoIndice");
-let distance = player.GetVar("varCursEnvDistance");
+  var player = GetPlayer();
 
 setTimeout(function() {
 
-let newExpoIndice = player.GetVar("varExpoIndice");
 
-let brightnessValue = 1 + (newExpoIndice / 3);
-let elements = [
-	document.querySelector("[data-acc-text='imgScene']"),
-	document.querySelector("[data-acc-text='imgPersonnages']"),
+	// Récupérer les variables Storyline avec des valeurs par défaut
+	let expoIndice = player.GetVar("varExpoIndice");
+	let newExpoIndice = player.GetVar("varExpoIndice");
 
-].filter(Boolean);
+    let luminance = player.GetVar("varCursEnvLuminance");
+    let distance = player.GetVar("varCursEnvDistance");
+    let focale = player.GetVar("varCursEnvFocale");
+    
+    
+ 
+ 
+  	// Sur exposition ou sous exposition
+	let brightnessValue = 1 + (newExpoIndice / 3);
+	let elements = [
+		document.querySelector("[data-acc-text='imgScene']"),
+		document.querySelector("[data-acc-text='imgPersonnages']"),
+	
+	].filter(Boolean);
+	
+	gsap.to(elements, {
+		duration: 0.3,
+		filter: `brightness(${brightnessValue})`,
+		onStart: () => elements.forEach(el => el.style.visibility = "visible"),
+	});
+	
+	
+    
+    
+	// Messages d'exposition
+	const statusTextExpo = 
+	    expoIndice === -2 ? "Image fortement sous-exposée, très sombre, détails dans les ombres perdus. Conseils : augmentez l'ISO (ex. de 100 à 400), ouvrez l'ouverture (ex. de f/8 à f/4), ou ralentissez la vitesse (ex. de 1/500s à 1/125s)." :
+	    expoIndice >= -1.99 && expoIndice <= -1.51 ? "Image nettement sous-exposée, sombre, avec des ombres denses. Conseils : passez à un ISO plus élevé (ex. de 200 à 800), utilisez une ouverture plus large (ex. de f/5.6 à f/2.8), ou prolongez la vitesse (ex. de 1/250s à 1/60s)." :
+	    expoIndice >= -1.50 && expoIndice <= -1.1 ? "Image sous-exposée, plus sombre que la normale, détails dans les ombres réduits. Conseils : augmentez légèrement l'ISO (ex. de 100 à 200), ouvrez un peu l'ouverture (ex. de f/8 à f/5.6), ou ralentissez la vitesse (ex. de 1/500s à 1/250s)." :
+	    expoIndice === -1 ? "Image légèrement sous-exposée, un peu sombre, mais détails encore visibles. Conseils : essayez un ISO un peu plus élevé (ex. de 100 à 200), une ouverture légèrement plus grande (ex. de f/5.6 à f/4), ou une vitesse plus lente (ex. de 1/250s à 1/125s)." :
+	    expoIndice >= -0.99 && expoIndice <= -0.51 ? "Image subtilement sous-exposée, légèrement plus sombre, exposition presque correcte. Conseils : ajustez finement l'ISO (ex. de 100 à 150), ouvrez légèrement l'ouverture (ex. de f/5.6 à f/4.5), ou ralentissez un peu la vitesse (ex. de 1/250s à 1/200s)." :
+	    expoIndice >= -0.50 && expoIndice <= -0.1 ? "Image à peine sous-exposée, très proche de l'exposition correcte. Conseils : un léger réglage suffit, comme augmenter l'ISO de 100 à 125, ouvrir de f/5.6 à f/5, ou passer de 1/250s à 1/200s." :
+	    expoIndice === 0 ? "Exposition correcte, image équilibrée avec des tons naturels. Conseils : maintenez ces paramètres ou ajustez légèrement l'ISO, l'ouverture, ou la vitesse pour un effet créatif (ex. ISO 100, f/5.6, 1/250s)." :
+	    expoIndice >= 0.1 && expoIndice <= 0.50 ? "Image à peine surexposée, très légèrement plus claire. Conseils : un léger réglage suffit, comme réduire l'ISO de 200 à 100, fermer de f/5 à f/5.6, ou passer de 1/200s à 1/250s." :
+	    expoIndice >= 0.51 && expoIndice <= 0.99 ? "Image subtilement surexposée, un peu plus claire, presque correcte. Conseils : diminuez légèrement l'ISO (ex. de 200 à 150), fermez un peu l'ouverture (ex. de f/4.5 à f/5.6), ou accélérez la vitesse (ex. de 1/200s à 1/250s)." :
+	    expoIndice === 1 ? "Image légèrement surexposée, plus claire, détails dans les hautes lumières réduits. Conseils : réduisez l'ISO (ex. de 200 à 100), fermez l'ouverture (ex. de f/4 à f/5.6), ou augmentez la vitesse (ex. de 1/125s à 1/250s)." :
+	    expoIndice >= 1.1 && expoIndice <= 1.50 ? "Image surexposée, plus lumineuse, perte de détails dans les zones claires. Conseils : baissez l'ISO (ex. de 400 à 200), utilisez une ouverture plus petite (ex. de f/4 à f/8), ou accélérez la vitesse (ex. de 1/60s à 1/250s)." :
+	    expoIndice >= 1.51 && expoIndice <= 1.99 ? "Image nettement surexposée, très lumineuse, hautes lumières écrasées. Conseils : réduisez fortement l'ISO (ex. de 800 à 200), fermez l'ouverture (ex. de f/2.8 à f/8), ou passez à une vitesse rapide (ex. de 1/60s à 1/500s)." :
+	    expoIndice === 2 ? "Image fortement surexposée, très claire, détails dans les hautes lumières perdus. Conseils : diminuez l'ISO au minimum (ex. de 800 à 100), fermez au maximum l'ouverture (ex. de f/2.8 à f/11), ou utilisez une vitesse très rapide (ex. de 1/60s à 1/1000s)." :
+	    "Valeur d'exposition hors plage. Conseils : vérifiez vos paramètres ISO, ouverture, et vitesse, et ajustez vers ISO 100, f/5.6, 1/100s pour un point de départ neutre.";
+	
+	player.SetVar("varTxtExpoStatus", statusTextExpo);
+	
+	// Messages de luminance
+	const statusTextLuminance = 
+	    distance === 1 ? "Condition orageuse, lumière très faible, ambiance sombre et contrastes élevés." :
+	    distance === 2 ? "Condition nuageuse, lumière diffuse, tons doux et détails équilibrés." :
+	    distance === 3 ? "Condition ensoleillée, lumière vive, couleurs éclatantes et ombres marquées." :
+	    "Condition de luminance inconnue";
+	
+	player.SetVar("varTxtLuminanceStatus", statusTextLuminance);
+	
+	
+	
 
-gsap.to(elements, {
-	duration: 0.3,
-	filter: `brightness(${brightnessValue})`,
-	onStart: () => elements.forEach(el => el.style.visibility = "visible"),
-});
 
-// Messages d'exposition
-const statusTextExpo = 
-    expoIndice === -2 ? "Image fortement sous-exposée, très sombre, détails dans les ombres perdus. Conseils : augmentez l'ISO (ex. de 100 à 400), ouvrez l'ouverture (ex. de f/8 à f/4), ou ralentissez la vitesse (ex. de 1/500s à 1/125s)." :
-    expoIndice >= -1.99 && expoIndice <= -1.51 ? "Image nettement sous-exposée, sombre, avec des ombres denses. Conseils : passez à un ISO plus élevé (ex. de 200 à 800), utilisez une ouverture plus large (ex. de f/5.6 à f/2.8), ou prolongez la vitesse (ex. de 1/250s à 1/60s)." :
-    expoIndice >= -1.50 && expoIndice <= -1.1 ? "Image sous-exposée, plus sombre que la normale, détails dans les ombres réduits. Conseils : augmentez légèrement l'ISO (ex. de 100 à 200), ouvrez un peu l'ouverture (ex. de f/8 à f/5.6), ou ralentissez la vitesse (ex. de 1/500s à 1/250s)." :
-    expoIndice === -1 ? "Image légèrement sous-exposée, un peu sombre, mais détails encore visibles. Conseils : essayez un ISO un peu plus élevé (ex. de 100 à 200), une ouverture légèrement plus grande (ex. de f/5.6 à f/4), ou une vitesse plus lente (ex. de 1/250s à 1/125s)." :
-    expoIndice >= -0.99 && expoIndice <= -0.51 ? "Image subtilement sous-exposée, légèrement plus sombre, exposition presque correcte. Conseils : ajustez finement l'ISO (ex. de 100 à 150), ouvrez légèrement l'ouverture (ex. de f/5.6 à f/4.5), ou ralentissez un peu la vitesse (ex. de 1/250s à 1/200s)." :
-    expoIndice >= -0.50 && expoIndice <= -0.1 ? "Image à peine sous-exposée, très proche de l'exposition correcte. Conseils : un léger réglage suffit, comme augmenter l'ISO de 100 à 125, ouvrir de f/5.6 à f/5, ou passer de 1/250s à 1/200s." :
-    expoIndice === 0 ? "Exposition correcte, image équilibrée avec des tons naturels. Conseils : maintenez ces paramètres ou ajustez légèrement l'ISO, l'ouverture, ou la vitesse pour un effet créatif (ex. ISO 100, f/5.6, 1/250s)." :
-    expoIndice >= 0.1 && expoIndice <= 0.50 ? "Image à peine surexposée, très légèrement plus claire. Conseils : un léger réglage suffit, comme réduire l'ISO de 200 à 100, fermer de f/5 à f/5.6, ou passer de 1/200s à 1/250s." :
-    expoIndice >= 0.51 && expoIndice <= 0.99 ? "Image subtilement surexposée, un peu plus claire, presque correcte. Conseils : diminuez légèrement l'ISO (ex. de 200 à 150), fermez un peu l'ouverture (ex. de f/4.5 à f/5.6), ou accélérez la vitesse (ex. de 1/200s à 1/250s)." :
-    expoIndice === 1 ? "Image légèrement surexposée, plus claire, détails dans les hautes lumières réduits. Conseils : réduisez l'ISO (ex. de 200 à 100), fermez l'ouverture (ex. de f/4 à f/5.6), ou augmentez la vitesse (ex. de 1/125s à 1/250s)." :
-    expoIndice >= 1.1 && expoIndice <= 1.50 ? "Image surexposée, plus lumineuse, perte de détails dans les zones claires. Conseils : baissez l'ISO (ex. de 400 à 200), utilisez une ouverture plus petite (ex. de f/4 à f/8), ou accélérez la vitesse (ex. de 1/60s à 1/250s)." :
-    expoIndice >= 1.51 && expoIndice <= 1.99 ? "Image nettement surexposée, très lumineuse, hautes lumières écrasées. Conseils : réduisez fortement l'ISO (ex. de 800 à 200), fermez l'ouverture (ex. de f/2.8 à f/8), ou passez à une vitesse rapide (ex. de 1/60s à 1/500s)." :
-    expoIndice === 2 ? "Image fortement surexposée, très claire, détails dans les hautes lumières perdus. Conseils : diminuez l'ISO au minimum (ex. de 800 à 100), fermez au maximum l'ouverture (ex. de f/2.8 à f/11), ou utilisez une vitesse très rapide (ex. de 1/60s à 1/1000s)." :
-    "Valeur d'exposition hors plage. Conseils : vérifiez vos paramètres ISO, ouverture, et vitesse, et ajustez vers ISO 100, f/5.6, 1/100s pour un point de départ neutre.";
-
-player.SetVar("varTxtExpoStatus", statusTextExpo);
-
-// Messages de luminance
-const statusTextLuminance = 
-    distance === 1 ? "Condition orageuse, lumière très faible, ambiance sombre et contrastes élevés." :
-    distance === 2 ? "Condition nuageuse, lumière diffuse, tons doux et détails équilibrés." :
-    distance === 3 ? "Condition ensoleillée, lumière vive, couleurs éclatantes et ombres marquées." :
-    "Condition de luminance inconnue";
-
-player.SetVar("varTxtLuminanceStatus", statusTextLuminance);
-
-
-// Définir les paramètres avec un switch
-var settings;
-switch (distance) {
-    case 1:
-        settings = {
-            bgImageScene: "https://raw.githubusercontent.com/karimbel/portfolio/main/simexposition/mobile/5tP7Bg7RSZc.png",
-            bgSizeScene: "100% 100%",
-            bgSizePersonnage: "200% 200%",
-            filterBlur: "blur(0.8px) contrast(100%)"
-        };
-        break;
-    case 2:
-        settings = {
-            bgImageScene: "https://raw.githubusercontent.com/karimbel/portfolio/main/simexposition/mobile/5yICyp9nNwh.png",
-            bgSizeScene: "100% 100%",
-            bgSizePersonnage: "150% 150%",
-            filterBlur: "blur(0.4px) contrast(100%)"
-        };
-        break;
-    case 3:
-        settings = {
-            bgImageScene: "https://raw.githubusercontent.com/karimbel/portfolio/main/simexposition/mobile/6OYrQ3sxQaE.png",
-            bgSizeScene: "100% 100%",
-            bgSizePersonnage: "100% 100%",
-            filterBlur: "blur(0px) contrast(100%)"
-        };
-        break;
-    default:
-        settings = {
-            bgImageScene: "https://raw.githubusercontent.com/karimbel/portfolio/main/simexposition/mobile/6OYrQ3sxQaE.png",
-            bgSizeScene: "100% 100%",
-            bgSizePersonnage: "100% 100%",
-            filterBlur: "blur(0px) contrast(100%)"
-        };
-        break;
-}
-
-// Injecter les styles CSS dynamiquement avec transitions
-var styleSheet = document.createElement("style");
-styleSheet.type = "text/css";
-styleSheet.innerText = `
-    [data-acc-text='imgScene'],
-    [data-acc-text='imgPersonnages'] {
-        width: 660px;
-        height: 491px;
-        background-position: 50% 50%;
-        background-repeat: no-repeat;
-        overflow: hidden;
-        transition: background-size 0.5s ease, filter 0.5s ease; /* Transition douce */
+    // Définir les paramètres pour luminance
+    var setLuminance;
+    switch (luminance) {
+        case 1:
+            setLuminance = {
+                bgImageScene: "https://raw.githubusercontent.com/karimbel/portfolio/main/simexposition/mobile/5o0KJav7WFE.png"
+            };
+            break;
+        case 2:
+            setLuminance = {
+                bgImageScene: "https://raw.githubusercontent.com/karimbel/portfolio/main/simexposition/mobile/5laLDcmDpCa.png"
+            };
+            break;
+        case 3:
+            setLuminance = {
+                bgImageScene: "https://raw.githubusercontent.com/karimbel/portfolio/main/simexposition/mobile/5cKFk3uz4TU.png"
+            };
+            break;
+        default:
+            setLuminance = {
+                bgImageScene: "https://raw.githubusercontent.com/karimbel/portfolio/main/simexposition/mobile/5cKFk3uz4TU.png"
+            };
+            break;
     }
-    [data-acc-text='imgScene'] {
-        background-image: url('${settings.bgImageScene}');
-        background-size: ${settings.bgSizeScene};
-        filter: ${settings.filterBlur};
-    }
-    [data-acc-text='imgPersonnages'] {
-        background-image: url('https://raw.githubusercontent.com/karimbel/portfolio/main/simexposition/mobile/6OOMmlhsZRi.png');
-        background-size: ${settings.bgSizePersonnage};
-        filter: blur(0px) contrast(100%);
-    }
-`;
-document.head.appendChild(styleSheet);
 
-}, 100);
+    // Définir les paramètres pour focale (exactement comme validé)
+    var settingsFocale;
+    switch (focale) {
+        case 18:
+            settingsFocale = {
+                filterBlur: "blur(1px) contrast(100%)" // Plus prononcé
+            };
+            break;
+        case 24:
+            settingsFocale = {
+                filterBlur: "blur(1.6px) contrast(100%)" // Plus prononcé
+            };
+            break;
+        case 35:
+            settingsFocale = {
+                filterBlur: "blur(2px) contrast(100%)" // Plus prononcé
+            };
+            break;
+        case 55:
+            settingsFocale = {
+                filterBlur: "blur(4px) contrast(100%)" // Plus prononcé
+            };
+            break;
+        default:
+            settingsFocale = {
+                filterBlur: "blur(1px) contrast(100%)"
+            };
+            break;
+    }
+
+    // Définir les paramètres pour distance (adapté à focale)
+    var settingsDistance;
+    switch (distance) {
+        case 1: // Équivalent à 1 m
+            settingsDistance = {
+                bgSizePersonnage: "200% 200%",
+                bgSizeSceneDistance: "120% 120%"
+            };
+            break;
+        case 2: // Équivalent à 2 m
+            settingsDistance = {
+                bgSizePersonnage: "166% 166%",
+                bgSizeSceneDistance: "110% 110%"
+            };
+            break;
+        case 3: // Équivalent à 3 m
+            settingsDistance = {
+                bgSizePersonnage: "133% 133%",
+                bgSizeSceneDistance: "105% 105%"
+            };
+            break;
+        case 4: // Équivalent à 4 m
+            settingsDistance = {
+                bgSizePersonnage: "100% 100%",
+                bgSizeSceneDistance: "100% 100%"
+            };
+            break;
+        default:
+            settingsDistance = {
+                bgSizePersonnage: "100% 100%",
+                bgSizeSceneDistance: "100% 100%"
+            };
+            break;
+    }
+
+    // Combiner bgSizeSceneDistance et bgSizeScene
+    const combinedBgSizeScene = `${parseFloat(settingsDistance.bgSizeSceneDistance) * parseFloat(settingsFocale.bgSizeSceneFocale.split(' ')[0]) / 100}% ${parseFloat(settingsDistance.bgSizeSceneDistance) * parseFloat(settingsFocale.bgSizeSceneFocale.split(' ')[1]) / 100}%`;
+
+    // Injecter les styles CSS dynamiquement
+    var styleSheet = document.createElement("style");
+    styleSheet.id = "resultatStyles";
+    styleSheet.type = "text/css";
+    styleSheet.innerText = `
+        [data-acc-text='imgScene'],
+        [data-acc-text='imgPersonnages'] {
+            width: 660px;
+        	height: 491px;
+            background-repeat: no-repeat;
+            overflow: hidden;
+            transition: background-size 0.5s ease, filter 0.5s ease, background-position 0.5s ease;
+        }
+        [data-acc-text='imgScene'] {
+            background-image: url('${setLuminance.bgImageScene}');
+            background-size: ${settingsDistance.bgSizeSceneDistance};
+            background-position: 50% 50%; /* Centré verticalement, comme distance */
+            filter: ${settingsFocale.filterBlur};
+        }
+        [data-acc-text='imgPersonnages'] {
+            background-image: url('https://raw.githubusercontent.com/karimbel/portfolio/main/simexposition/mobile/5pu0seQFKfr.png');
+            background-size: ${settingsDistance.bgSizePersonnage};
+            background-position: 50% 50%; /* Centré verticalement, comme distance */
+            filter: blur(0px) contrast(100%);
+        }
+    `;
+    let oldStyle = document.getElementById("resultatStyles");
+    if (oldStyle) oldStyle.remove();
+    document.head.appendChild(styleSheet);   
+	
+	
+}, 200);
+
+
+
+
 }
 
 window.Script10 = function()
