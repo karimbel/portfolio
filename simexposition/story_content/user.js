@@ -908,29 +908,10 @@ setTimeout(function() {
 
 	// Récupérer les variables Storyline avec des valeurs par défaut
 	let expoIndice = player.GetVar("varExpoIndice");
-	let newExpoIndice = player.GetVar("varExpoIndice");
-
     let luminance = player.GetVar("varCursEnvLuminance");
     let distance = player.GetVar("varCursEnvDistance");
     let focale = player.GetVar("varCursEnvFocale");
     
-    
- 
- 
-  	// Sur exposition ou sous exposition
-	let brightnessValue = 1 + (newExpoIndice / 3);
-	let elements = [
-		document.querySelector("[data-acc-text='imgScene']"),
-		document.querySelector("[data-acc-text='imgPersonnages']"),
-	
-	].filter(Boolean);
-	
-	gsap.to(elements, {
-		duration: 0.3,
-		filter: `brightness(${brightnessValue})`,
-		onStart: () => elements.forEach(el => el.style.visibility = "visible"),
-	});
-	
 	
     
     
@@ -955,9 +936,9 @@ setTimeout(function() {
 	
 	// Messages de luminance
 	const statusTextLuminance = 
-	    distance === 1 ? "Condition orageuse, lumière très faible, ambiance sombre et contrastes élevés." :
-	    distance === 2 ? "Condition nuageuse, lumière diffuse, tons doux et détails équilibrés." :
-	    distance === 3 ? "Condition ensoleillée, lumière vive, couleurs éclatantes et ombres marquées." :
+	    luminance === 1 ? "Condition orageuse, lumière très faible, ambiance sombre et contrastes élevés." :
+	    luminance === 2 ? "Condition nuageuse, lumière diffuse, tons doux et détails équilibrés." :
+	    luminance === 3 ? "Condition ensoleillée, lumière vive, couleurs éclatantes et ombres marquées." :
 	    "Condition de luminance inconnue";
 	
 	player.SetVar("varTxtLuminanceStatus", statusTextLuminance);
@@ -1098,6 +1079,28 @@ setTimeout(function() {
 }
 
 window.Script10 = function()
+{
+  var player = GetPlayer();
+
+	// Récupérer les variables Storyline avec des valeurs par défaut
+	let expoIndice = player.GetVar("varExpoIndice");    
+ 
+  	// Sur exposition ou sous exposition
+	let brightnessValue = 1 + (expoIndice / 3);
+	let elements = [
+		document.querySelector("[data-acc-text='imgScene']"),
+		document.querySelector("[data-acc-text='imgPersonnages']"),
+	
+	].filter(Boolean);
+	
+	gsap.to(elements, {
+		//duration: 0.3,
+		filter: `brightness(${brightnessValue})`,
+		onStart: () => elements.forEach(el => el.style.visibility = "visible"),
+	});
+}
+
+window.Script11 = function()
 {
   // Récupérer le player Storyline
 var player = GetPlayer();
