@@ -5,6 +5,13 @@
     "linkedin": "https://www.linkedin.com/in/karimbelkacem/",
     "projects": [
         {
+            "preview": "/portfolio/images/projet/projet7.png",
+            "title": "Graphique en barre",
+            "description": "Dans ce module interactif, l’apprenant explore les données sur les ingénieurs actifs dans les grandes puissances — Europe, États-Unis, Russie et Chine — à travers trois années consécutives (2023, 2024, 2025). Un graphique à barres dynamique donne vie à ces chiffres, issus de sources réelles et de projections fiables. En naviguant d’une année à l’autre via des boutons intuitifs, l’apprenant déclenche des transitions fluides, révélant l’évolution des données en temps réel, pour une immersion instructive et captivante.",
+            "caracteristique": "Storyline360, JS, GSAP, HTML5",
+            "link": "https://karimbel.github.io/portfolio/graph-pays-annee-gsap/story.html"
+        },
+        {
             "preview": "/portfolio/images/projet/projet6.png",
             "title": "Loi de l’Inverse du Carré",
             "description": "Dans ce module, nous avons exploré la loi de l’inverse du carré, une règle essentielle pour comprendre comment la lumière se comporte en photographie. À travers des exemples concrets, une activité pratique et des conseils pour maîtriser l’éclairage pour appliquer cette loi pour sublimer vos photos !",
