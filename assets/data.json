@@ -5,6 +5,13 @@
     "linkedin": "https://www.linkedin.com/in/karimbelkacem/",
     "projects": [
         {
+            "preview": "/portfolio/images/projet/projet6.png",
+            "title": "Loi de l’Inverse du Carré",
+            "description": "Dans ce module, nous avons exploré la loi de l’inverse du carré, une règle essentielle pour comprendre comment la lumière se comporte en photographie. Nous avons vu que l’intensité de la lumière diminue rapidement avec la distance : en doublant la distance entre la source lumineuse et le sujet, l’intensité est divisée par quatre (1/d²). À travers des exemples concrets, comme un portrait en studio avec un flash à 1 m puis à 2 m, nous avons montré comment cette perte de lumière affecte l’exposition et nécessite des ajustements, comme ouvrir le diaphragme (ex. de f/5.6 à f/2.8) ou augmenter l’ISO (ex. de 100 à 400). Une activité pratique vous a permis de tester cet effet en observant la différence d’éclairage à plusieurs distances. Enfin, nous vous avons donné des conseils pour maîtriser l’éclairage : tester les distances, utiliser un posemètre, et expérimenter avec des diffuseurs. Vous êtes maintenant prêts à appliquer cette loi pour sublimer vos photos !",
+            "caracteristique": "Storyline360, HTML5",
+            "link": "https://karimbel.github.io/portfolio/loi-inverse-carre/story.html"
+        },
+        {
             "preview": "/portfolio/images/projet/projet5.png",
             "title": "SimExposition",
             "description": "Découvrez mon Simulateur d'Exposition, un outil interactif conçu pour apprendre et maîtriser les paramètres fondamentaux de la photographie : ouverture, vitesse d'obturation et sensibilité ISO. Ce simulateur offre une expérience immersive pour comprendre l'impact de chaque réglage sur vos photos.",
