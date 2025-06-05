@@ -5,6 +5,13 @@
     "linkedin": "https://www.linkedin.com/in/karimbelkacem/",
     "projects": [
         {
+            "preview": "/portfolio/images/projet/projet8.png",
+            "title": "Connaître son profil photographique en 10mn",
+            "description": "Quiz de positionnement, que vous soyez un novice curieux, un passionné en progression ou un pro aguerri, ce quiz de 10 minutes va révéler votre niveau. Répondez à nos questions, laissez parler vos connaissance et découvrez si vous êtes un débutant, un intermédiaire ou un avancé dans l’univers de la photographie Nikon.",
+            "caracteristique": "Storyline360, JS, HTML5",
+            "link": "https://karimbel.github.io/portfolio/connaitre_son_profil_photographique_en_10mn/story.html"
+        },
+        {
             "preview": "/portfolio/images/projet/projet7.png",
             "title": "Graphique en barre",
             "description": "Dans ce module interactif, l’apprenant explore les données sur les ingénieurs actifs dans les grandes puissances — Europe, États-Unis, Russie et Chine — à travers trois années consécutives (2023, 2024, 2025). Un graphique à barres dynamique donne vie à ces chiffres, issus de sources réelles et de projections fiables. En naviguant d’une année à l’autre via des boutons intuitifs, l’apprenant déclenche des transitions fluides, révélant l’évolution des données en temps réel, pour une immersion instructive et captivante.",
