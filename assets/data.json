@@ -5,6 +5,13 @@
     "linkedin": "https://www.linkedin.com/in/karimbelkacem/",
     "projects": [
         {
+            "preview": "/portfolio/images/projet/projet9.png",
+            "title": "Interface d'intro UI Design couleur",
+            "description": "Cette interface utilise une grille pour aligner les éléments garantit une mise en page cohérente, professionnelle. Elle structure l'espace en colonnes et gouttières prédéfinies, facilitant l'organisation du contenu (textes, images, boutons) et assurant une répartition équilibrée. Vous pouvez télécharger la source au format .story ",
+            "caracteristique": "Storyline360, JS, HTML5",
+            "link": "https://karimbel.github.io/portfolio/interfaceUI-Color/story.html"
+        },
+        {
             "preview": "/portfolio/images/projet/projet8.png",
             "title": "Connaître son profil photographique en 10mn",
             "description": "Quiz de positionnement, que vous soyez un novice curieux, un passionné en progression ou un pro aguerri, ce quiz de 10 minutes va révéler votre niveau. Répondez à nos questions, laissez parler vos connaissance et découvrez si vous êtes un débutant, un intermédiaire ou un avancé dans l’univers de la photographie Nikon.",
