@@ -7,7 +7,7 @@
         {
             "preview": "/portfolio/images/projet/projet9.png",
             "title": "Interface d'intro UI Design couleur",
-            "description": "Cette interface utilise une grille pour aligner les éléments garantit une mise en page cohérente, professionnelle. Elle structure l'espace en colonnes et gouttières prédéfinies, facilitant l'organisation du contenu (textes, images, boutons) et assurant une répartition équilibrée. Vous pouvez télécharger la source au format .story - url : https://github.com/karimbel/portfolio/blob/main/_sources-storyline",
+            "description": "Cette interface utilise une grille pour aligner les éléments garantit une mise en page cohérente, professionnelle. Elle structure l'espace en colonnes et gouttières prédéfinies, facilitant l'organisation du contenu (textes, images, boutons) et assurant une répartition équilibrée. Vous pouvez télécharger la source au format .story - url : <a href=\"https://github.com/karimbel/portfolio/blob/main/_sources-storyline\">_sources-storyline/interfaceUI-color.story</a>",
             "caracteristique": "Storyline360, JS, HTML5",
             "link": "https://karimbel.github.io/portfolio/interfaceUI-Color/story.html"
         },
