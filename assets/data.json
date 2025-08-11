@@ -9,63 +9,63 @@
             "title": "Interface d'intro UI Design couleur",
             "description": "Cette interface utilise une grille pour aligner les éléments garantit une mise en page cohérente, professionnelle. Elle structure l'espace en colonnes et gouttières prédéfinies, facilitant l'organisation du contenu (textes, images, boutons) et assurant une répartition équilibrée. Vous pouvez télécharger la source au format .story - url : <a href=\"https://github.com/karimbel/portfolio/blob/main/_sources-storyline\">_sources-storyline/interfaceUI-color.story</a>",
             "caracteristique": "Storyline360, JS, HTML5",
-            "link": "https://karimbel.github.io/portfolio/interfaceUI-Color/story.html"
+            "link": "https://karimbel.github.io/portfolio/projets/interfaceUI-Color/story.html"
         },
         {
             "preview": "/portfolio/images/projet/projet8.png",
             "title": "Connaître son profil photographique en 10mn",
             "description": "Quiz de positionnement, que vous soyez un novice curieux, un passionné en progression ou un pro aguerri, ce quiz de 10 minutes va révéler votre niveau. Répondez à nos questions, laissez parler vos connaissance et découvrez si vous êtes un débutant, un intermédiaire ou un avancé dans l’univers de la photographie Nikon.",
             "caracteristique": "Storyline360, JS, HTML5",
-            "link": "https://karimbel.github.io/portfolio/connaitre_son_profil_photographique_en_10mn/story.html"
+            "link": "https://karimbel.github.io/portfolio/projets/connaitre_son_profil_photographique_en_10mn/story.html"
         },
         {
             "preview": "/portfolio/images/projet/projet7.png",
             "title": "Graphique en barre",
             "description": "Dans ce module interactif, l’apprenant explore les données sur les ingénieurs actifs dans les grandes puissances — Europe, États-Unis, Russie et Chine — à travers trois années consécutives (2023, 2024, 2025). Un graphique à barres dynamique donne vie à ces chiffres, issus de sources réelles et de projections fiables. En naviguant d’une année à l’autre via des boutons intuitifs, l’apprenant déclenche des transitions fluides, révélant l’évolution des données en temps réel, pour une immersion instructive et captivante.",
             "caracteristique": "Storyline360, JS, GSAP, HTML5",
-            "link": "https://karimbel.github.io/portfolio/graph-pays-annee-gsap/story.html"
+            "link": "https://karimbel.github.io/portfolio/projets/graph-pays-annee-gsap/story.html"
         },
         {
             "preview": "/portfolio/images/projet/projet6.png",
             "title": "Loi de l’Inverse du Carré",
             "description": "Dans ce module, nous avons exploré la loi de l’inverse du carré, une règle essentielle pour comprendre comment la lumière se comporte en photographie. À travers des exemples concrets, une activité pratique et des conseils pour maîtriser l’éclairage pour appliquer cette loi pour sublimer vos photos !",
             "caracteristique": "Storyline360, HTML5",
-            "link": "https://karimbel.github.io/portfolio/loi-inverse-carre/story.html"
+            "link": "https://karimbel.github.io/portfolio/projets/loi-inverse-carre/story.html"
         },
         {
             "preview": "/portfolio/images/projet/projet5.png",
             "title": "SimExposition",
             "description": "Découvrez mon Simulateur d'Exposition, un outil interactif conçu pour apprendre et maîtriser les paramètres fondamentaux de la photographie : ouverture, vitesse d'obturation et sensibilité ISO. Ce simulateur offre une expérience immersive pour comprendre l'impact de chaque réglage sur vos photos.",
             "caracteristique": "Storyline360, Javascript, GSAP, HTML5",
-            "link": "https://karimbel.github.io/portfolio/simexposition/story.html"
+            "link": "https://karimbel.github.io/portfolio/projets/simexposition/story.html"
         },
         {
             "preview": "/portfolio/images/projet/projet4.png",
             "title": "SimGSAP",
             "description": "Ce module interactif permet aux utilisateurs de saisir un mot, puis d’explorer sa définition et de le manipuler dans une animation dynamique. Après avoir tapé un mot, une recherche automatique récupère sa définition via une source en ligne (CNRTL). En parallèle, le mot s’anime à l’écran grâce à la bibliothèque GSAP, avec des mouvements fluides dans différentes directions. Les utilisateurs peuvent personnaliser l’expérience en temps réel : choisir la police, ajuster la vitesse d’apparition, modifier la taille, sélectionner parmi trois couleurs fixes ou revenir à une couleur aléatoire, et contrôler la direction (Haut, Bas, Gauche, Droite, ou Aléatoire). Simple et ludique, ce module mêle apprentissage et créativité visuelle.",
             "caracteristique": "Storyline360, Javascript, GSAP, HTML5",
-            "link": "https://karimbel.github.io/portfolio/simulateur-GSAP/story.html"
+            "link": "https://karimbel.github.io/portfolio/projets/simulateur-GSAP/story.html"
         },
         {
             "preview": "/portfolio/images/projet/projet3.png",
             "title": "Evaluer une action de formation",
             "description": "Dans ce module, le formateurs-apprenant va découvrir des méthodes et des outils pour évaluer avec précision et pertinence. Plus qu’un simple bilan, l’évaluation est un levier pour optimiser vos actions futures. Préparez-vous à explorer ce processus structuré et à en faire un atout pour votre organisation",
             "caracteristique": "Storyline360, Javascript, HTML5",
-            "link": "https://karimbel.github.io/portfolio/evaluer-une-action-de-formation/story.html"
+            "link": "https://karimbel.github.io/portfolio/projets/evaluer-une-action-de-formation/story.html"
         },
         {
             "preview": "/portfolio/images/projet/projet2.png",
             "title": "Valeur d'Exposition",
             "description": "Dans cet exercice, l'apprenant manipule un curseur pour ajuster la valeur d’exposition d’une image. Une représentation visuelle affiche en temps réel l’impact de son choix sur la luminosité, lui permettant de voir comment l’EV influence le rendu de l'image et les paramètres de l'appareil photo. Pour aller plus loin, des explications détaillées explorent les bases théoriques de l’EV, combinant ouverture, vitesse d’obturation et sensibilité ISO. Idéal pour comprendre concrètement cette notion essentielle en photographie.",
             "caracteristique": "Storyline360, Javascript, HTML5",
-            "link": "https://karimbel.github.io/portfolio/ev-exposure-value/story.html"
+            "link": "https://karimbel.github.io/portfolio/projets/ev-exposure-value/story.html"
         },
         {
             "preview": "/portfolio/images/projet/projet1.png",
             "title": "Émancipation",
             "description": "Émancipation est un jeu de découverte, qui permet à l'apprenant de découvrir à travers un parcours de questionnements et d'apports de connaissances aléatoires, l'autodétermination que possèdent les personnes en situation de handicap vivant en établissement médico-social pour gagner en autonomie.",
             "caracteristique": "Storyline360, Javascript, HTML5",
-            "link": "https://karimbel.github.io/portfolio/emancipation/story.html"
+            "link": "https://karimbel.github.io/portfolio/projets/emancipation/story.html"
         }
     ]
 }
