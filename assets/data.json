@@ -6,7 +6,7 @@
     "projects": [
         {
             "preview": "/portfolio/images/projet/projet11.png",
-            "title": "Recréation moderne du jeu classique Pong avec Articulate Storyline et JavaScript",
+            "title": "Pong avec Articulate Storyline et JavaScript",
             "description": "Ce projet montre comment exploiter Storyline au-delà de l'e-learning traditionnel, en créant une expérience interactive qui allie design, programmation et gameplay. C'est aussi une exploration de la synchronisation entre variables Storyline et JavaScript, avec un focus sur la robustesse (gestion d'erreurs via try-catch) et l'expérience utilisateur.",
             "caracteristique": "Storyline360, JS, GSAP, HTML5",
             "link": "https://karimbel.github.io/portfolio/projets/pong/story.html"
