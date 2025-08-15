@@ -5,6 +5,13 @@
     "linkedin": "https://www.linkedin.com/in/karimbelkacem/",
     "projects": [
         {
+            "preview": "/portfolio/images/projet/projet11.png",
+            "title": "Recréation moderne du jeu classique Pong avec Articulate Storyline et JavaScript",
+            "description": "Ce projet montre comment exploiter Storyline au-delà de l'e-learning traditionnel, en créant une expérience interactive qui allie design, programmation et gameplay. C'est aussi une exploration de la synchronisation entre variables Storyline et JavaScript, avec un focus sur la robustesse (gestion d'erreurs via try-catch) et l'expérience utilisateur.",
+            "caracteristique": "Storyline360, JS, GSAP, HTML5",
+            "link": "https://karimbel.github.io/portfolio/projets/pong/story.html"
+        },
+        {
             "preview": "/portfolio/images/projet/projet10.png",
             "title": "Animations dynamiques avec JavaScript et GSAP",
             "description": "Pour un module e-learning, j’ai créé un script qui anime un cercle rouge et un sablier sur une grille 9x9. Le cercle se déplace en L (ex. A1 → E8, aléatoire ou via formulaire/curseur), et le sablier tourne à 90° par étape. Animations fluides (0.15s/étape) avec GSAP, intégration Storyline, et code optimisé sans erreurs. Vous pouvez télécharger la source au format .story - url : <a href=\"https://github.com/karimbel/portfolio/blob/main/_sources-storyline\">_sources-storyline/MoveAndAnimationObjectGSAP.story</a>",
