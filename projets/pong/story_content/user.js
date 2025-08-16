@@ -19,7 +19,7 @@ window.Script1 = function()
 console.log("Script JavaScript exécuté : jeuTermine devrait être true par défaut");
 
 // Récupérer les objets avec la méthode object() en utilisant les ID fournis
-const zoneJeu = object('6f8L76dkODW'); // Zone de jeu
+const zoneJeu = object('63nHnt7avy0'); // Zone de jeu
 const raquetteJoueur1 = object('65tIam9uAsd'); // Raquette joueur 1 (gauche, humain)
 const raquetteJoueur2 = object('5vJNZQ44TyG'); // Raquette joueur 2 (droite, IA)
 const balle = object('6ZSPs0zJ02g'); // Balle
