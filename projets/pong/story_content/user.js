@@ -97,31 +97,39 @@ document.addEventListener("keyup", function (event) {
 });
 
 // --- Ajout : Gestion des événements tactiles pour mobile/tablette ---
+var isTouchDevice = 'ontouchstart' in window; // Détection pour logs optionnels
 document.addEventListener('touchstart', function(e) {
-    e.preventDefault(); // Empêche les comportements par défaut comme le zoom/scroll
+    e.preventDefault(); // Empêche zoom/scroll
+    console.log("Touchstart détecté"); // Pour vérifier si l'événement se déclenche
 }, { passive: false });
 
 document.addEventListener('touchmove', function(e) {
-    e.preventDefault(); // Empêche le scroll/zoom
-    const touch = e.touches[0]; // Prend le premier doigt tactile
-    const rect = zoneJeu.getBoundingClientRect(); // Récupère les dimensions et position de la zone de jeu (scalée)
-    
-    const scaleX = rect.width / largeurTerrain; // Facteur d'échelle horizontal
-    const scaleY = rect.height / hauteurTerrain; // Facteur d'échelle vertical
-    
-    const relativeX = (touch.clientX - rect.left) / scaleX; // Position X relative au jeu
-    if (relativeX < largeurTerrain / 2) { // Touch sur la moitié gauche (raquette joueur 1)
-        const relativeY = (touch.clientY - rect.top) / scaleY; // Position Y relative au jeu
-        positionYJoueur1 = Math.max(0, Math.min(relativeY - 50, hauteurTerrain - 100)); // Centre la raquette (hauteur 100) et clamp aux limites
+    e.preventDefault();
+    const touch = e.touches[0];
+    const zoneJeuElement = document.querySelector('[data-model-id="63nHnt7avy0"]'); // Élément DOM réel via data-model-id
+    if (!zoneJeuElement) {
+        console.log("Erreur : zoneJeuElement non trouvé via data-model-id");
+        return;
+    }
+    const rect = zoneJeuElement.getBoundingClientRect();
+    console.log("Rect calculé :", rect); // Vérifie les dimensions scalées
+
+    const scaleX = rect.width / largeurTerrain;
+    const scaleY = rect.height / hauteurTerrain;
+
+    const relativeX = (touch.clientX - rect.left) / scaleX;
+    if (relativeX < largeurTerrain / 2) {
+        const relativeY = (touch.clientY - rect.top) / scaleY;
+        positionYJoueur1 = Math.max(0, Math.min(relativeY - 50, hauteurTerrain - 100));
         gsap.set(raquetteJoueur1, { y: positionYJoueur1 });
         player.SetVar("positionYJoueur1", positionYJoueur1);
-        // Optionnel : console.log("Raquette joueur 1 déplacée tactile à y =", positionYJoueur1); // Évite le spam en production
+        console.log("Raquette joueur 1 déplacée tactile à y =", positionYJoueur1); // Active pour débogage
     }
 }, { passive: false });
 
-// Optionnel : touchend pour arrêter tout mouvement, mais pas nécessaire ici car position directe
 document.addEventListener('touchend', function(e) {
     e.preventDefault();
+    console.log("Touchend détecté");
 }, { passive: false });
 
 // --- Déplacer la raquette du joueur 1 (humain, touches clavier) ---
