@@ -13,7 +13,7 @@
         <options>
           <option name="title_enabled" value="true">
             <options>
-              <option name="title_text" value="Pong" />
+              <option name="title_text" value="pong" />
             </options>
           </option>
           <option name="logo_enabled" value="false">

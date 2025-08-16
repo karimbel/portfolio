@@ -96,6 +96,34 @@ document.addEventListener("keyup", function (event) {
     console.log("Touche relâchée :", event.key);
 });
 
+// --- Ajout : Gestion des événements tactiles pour mobile/tablette ---
+document.addEventListener('touchstart', function(e) {
+    e.preventDefault(); // Empêche les comportements par défaut comme le zoom/scroll
+}, { passive: false });
+
+document.addEventListener('touchmove', function(e) {
+    e.preventDefault(); // Empêche le scroll/zoom
+    const touch = e.touches[0]; // Prend le premier doigt tactile
+    const rect = zoneJeu.getBoundingClientRect(); // Récupère les dimensions et position de la zone de jeu (scalée)
+    
+    const scaleX = rect.width / largeurTerrain; // Facteur d'échelle horizontal
+    const scaleY = rect.height / hauteurTerrain; // Facteur d'échelle vertical
+    
+    const relativeX = (touch.clientX - rect.left) / scaleX; // Position X relative au jeu
+    if (relativeX < largeurTerrain / 2) { // Touch sur la moitié gauche (raquette joueur 1)
+        const relativeY = (touch.clientY - rect.top) / scaleY; // Position Y relative au jeu
+        positionYJoueur1 = Math.max(0, Math.min(relativeY - 50, hauteurTerrain - 100)); // Centre la raquette (hauteur 100) et clamp aux limites
+        gsap.set(raquetteJoueur1, { y: positionYJoueur1 });
+        player.SetVar("positionYJoueur1", positionYJoueur1);
+        // Optionnel : console.log("Raquette joueur 1 déplacée tactile à y =", positionYJoueur1); // Évite le spam en production
+    }
+}, { passive: false });
+
+// Optionnel : touchend pour arrêter tout mouvement, mais pas nécessaire ici car position directe
+document.addEventListener('touchend', function(e) {
+    e.preventDefault();
+}, { passive: false });
+
 // --- Déplacer la raquette du joueur 1 (humain, touches clavier) ---
 function deplacerRaquetteJoueur1() {
     if (jeuTermine) return; // Arrêter si jeu en pause/terminé
