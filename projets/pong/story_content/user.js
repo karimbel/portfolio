@@ -56,13 +56,16 @@ var scoreFinal = player.GetVar("scoreFinal") || 5;
 var jeuTermine = player.GetVar("jeuTermine") || true;
 var jeuAlerteFin = player.GetVar("jeuAlerteFin") || false;
 var vitesseRaquette = player.GetVar("vitesseRaquette") || 5;
+var jouerBalleMur = player.GetVar("jouerBalleMur") || false;
+var jouerBalleRaquette = player.GetVar("jouerBalleRaquette") || false;
+var activeEffetsSonores = player.GetVar("activeEffetsSonores") || false;
 
 // Vérifier si les variables Storyline sont récupérées
 console.log("Variables Storyline chargées :", {
     positionXBalle, positionYBalle, vitesseXBalle, vitesseYBalle,
     positionYJoueur1, positionYJoueur2, cibleY,
     scoreJoueur1, scoreJoueur2, niveauDifficulte, scoreFinal, jeuTermine, jeuAlerteFin,
-    vitesseRaquette
+    vitesseRaquette, jouerBalleMur, jouerBalleRaquette, activeEffetsSonores
 });
 
 // --- Définir le facteur de lissage pour l'IA selon la difficulté ---
@@ -199,6 +202,12 @@ function deplacerBalle() {
         vitesseYBalle = -vitesseYBalle;
         player.SetVar("vitesseYBalle", vitesseYBalle);
         console.log("Rebond bord vertical, vitesseYBalle =", vitesseYBalle);
+        if (activeEffetsSonores == true) {
+        	player.SetVar("jouerBalleMur", true);
+        } else {
+        	player.SetVar("jouerBalleMur", false);
+        }
+
     }
 
     try {
@@ -206,12 +215,22 @@ function deplacerBalle() {
             vitesseXBalle = -vitesseXBalle;
             player.SetVar("vitesseXBalle", vitesseXBalle);
             console.log("Rebond raquette joueur 1, positionXBalle =", positionXBalle, "positionYJoueur1 =", positionYJoueur1);
+        	if (activeEffetsSonores == true) { 
+        		player.SetVar("jouerBalleRaquette", true);
+        	} else {
+        		player.SetVar("jouerBalleRaquette", false);
+        	}
         }
 
         if (positionXBalle >= 925 && positionXBalle <= 945 && positionYBalle >= positionYJoueur2 && positionYBalle <= positionYJoueur2 + 100) {
             vitesseXBalle = -vitesseXBalle;
             player.SetVar("vitesseXBalle", vitesseXBalle);
             console.log("Rebond raquette joueur 2, positionXBalle =", positionXBalle, "positionYJoueur2 =", positionYJoueur2);
+        	if (activeEffetsSonores == true) { 
+        		player.SetVar("jouerBalleRaquette", true);
+        	} else {
+        		player.SetVar("jouerBalleRaquette", false);
+        	}
         }
     } catch (e) {
         console.log("Erreur lors de la détection de collision :", e);
@@ -313,11 +332,15 @@ function reinitialiserJeu() {
         player.SetVar("scoreFinal", scoreFinal);
         player.SetVar("niveauDifficulte", niveauDifficulte);
         player.SetVar("vitesseRaquette", vitesseRaquette);
+        player.SetVar("jouerBalleRaquette", false);
+        player.SetVar("jouerBalleMur", false);
+        player.SetVar("activeEffetsSonores", false);
         console.log("Variables Storyline réinitialisées :", {
             positionXBalle, positionYBalle, vitesseXBalle, vitesseYBalle,
             positionYJoueur1, positionYJoueur2, cibleY,
             scoreJoueur1, scoreJoueur2, jeuTermine, jeuAlerteFin,
-            scoreFinal, niveauDifficulte, vitesseRaquette
+            scoreFinal, niveauDifficulte, vitesseRaquette, jouerBalleRaquette, 
+            jouerBalleMur, activeEffetsSonores
         });
     } catch (e) {
         console.log("Erreur lors de la mise à jour des variables Storyline :", e);
@@ -339,6 +362,9 @@ function demarrerJeu() {
     scoreFinal = player.GetVar("scoreFinal") || 5;
     niveauDifficulte = player.GetVar("niveauDifficulte") || 2;
     vitesseRaquette = player.GetVar("vitesseRaquette") || 5;
+    jouerBalleMur = player.GetVar("jouerBalleMur") || false;
+    jouerBalleRaquette = player.GetVar("jouerBalleRaquette") || false;
+    activeEffetsSonores = player.GetVar("activeEffetsSonores") || false;
 
     // Recalculer le facteur de lissage basé sur la difficulté actuelle
     switch (niveauDifficulte) {
@@ -354,6 +380,7 @@ function demarrerJeu() {
     jeuTermine = false;
     player.SetVar("jeuTermine", false);
     player.SetVar("jeuAlerteFin", false);
+
     console.log("Jeu démarré : jeuTermine = false");
     deplacerBalle();
     deplacerRaquetteJoueur1();
