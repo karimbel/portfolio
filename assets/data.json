@@ -7,7 +7,7 @@
         {
             "preview": "/portfolio/images/projet/projet12.png",
             "title": "Space Invaders revisité avec Articulate Storyline",
-            "description": "Découvrez une version moderne du légendaire Space Invaders, conçu avec Articulate Storyline. Ce jeu captivant allie gameplay fluide, animations dynamiques grâce à GSAP, et une progression à travers cinq niveaux de difficulté croissante. Avec des options sonores personnalisables et une intégration soignée, ce projet repousse les limites de l’e-learning interactif. Plongez dans cette expérience ludique et revivez un classique revisité !",
+            "description": "Plongez dans une version moderne du mythique Space Invaders, créé avec Articulate Storyline. Ce jeu interactif propose un gameplay captivant, des animations fluides et cinq niveaux de difficulté progressive. Avec des options sonores personnalisables, il offre une expérience ludique et immersive, démontrant le potentiel de l’e-learning pour allier apprentissage et divertissement.  ",
             "caracteristique": "Storyline360, JS, GSAP, HTML5",
             "link": "https://karimbel.github.io/portfolio/projets/space-invaders/story.html"
         },
