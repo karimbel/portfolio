@@ -5,9 +5,16 @@
     "linkedin": "https://www.linkedin.com/in/karimbelkacem/",
     "projects": [
         {
+            "preview": "/portfolio/images/projet/projet13.png",
+            "title": "entretienSim360",
+            "description": "Simulateur RH d’entretien interactif, conçu avec Articulate Storyline 360 et JavaScript. Les candidats relèvent trois scénarios (Motivation, Évaluation, Personnalisation) à trois niveaux (Débutant, Expérimenté, Expert), avec un dialogue vidéo pour le mini-simulateur. Scores dynamiques (Compétences, Empathie, Organisation) et satisfaction ajustée, avec commentaires IMPACT personnalisés. Outil polyvalent pour le diagnostic et la présélection.",
+            "caracteristique": "Storyline360, JS, HTML5",
+            "link": "https://karimbel.github.io/portfolio/projets/entretienSim360/story.html"
+        },
+        {
             "preview": "/portfolio/images/projet/projet12.png",
             "title": "Space Invaders revisité avec Articulate Storyline",
-            "description": "Plongez dans une version moderne du mythique Space Invaders, créé avec Articulate Storyline. Ce jeu interactif propose un gameplay captivant, des animations fluides et cinq niveaux de difficulté progressive. Avec des options sonores personnalisables, il offre une expérience ludique et immersive, démontrant le potentiel de l’e-learning pour allier apprentissage et divertissement.  ",
+            "description": "Plongez dans une version moderne du mythique Space Invaders, créé avec Articulate Storyline. Ce jeu interactif propose un gameplay captivant, des animations fluides et cinq niveaux de difficulté progressive. Avec des options sonores personnalisables, il offre une expérience ludique et immersive, démontrant le potentiel de l’e-learning pour allier apprentissage et divertissement.",
             "caracteristique": "Storyline360, JS, GSAP, HTML5",
             "link": "https://karimbel.github.io/portfolio/projets/space-invaders/story.html"
         },
