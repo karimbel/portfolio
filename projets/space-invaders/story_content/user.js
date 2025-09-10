@@ -17,8 +17,7 @@ window.Script1 = function()
 {
   // --- Configuration du jeu (variables encapsulées) ---
 let effetsSonoresStoryline = getVar("effetsSonores");
-// console.log("Effets sonores initiaux : " + effetsSonoresStoryline);
-
+console.log("Effets sonores initiaux : " + effetsSonoresStoryline);
 const jeu = {
     dimensions: {
         largeur: null,
@@ -57,9 +56,9 @@ function mettreAJourEffetsSonores() {
     try {
         effetsSonoresStoryline = getVar('effetsSonores') !== undefined ? getVar('effetsSonores') : true;
         jeu.sons.effetsSonores = effetsSonoresStoryline;
-        // console.log("Effets sonores mis à jour : jeu.sons.effetsSonores=" + jeu.sons.effetsSonores);
+        console.log("Effets sonores mis à jour : jeu.sons.effetsSonores=" + jeu.sons.effetsSonores);
     } catch (e) {
-        // console.log("Erreur lors de la mise à jour de effetsSonores : " + e.message);
+        console.log("Erreur lors de la mise à jour de effetsSonores : " + e.message);
     }
 }
 
@@ -96,7 +95,7 @@ function cleanUp() {
     jeu.balles.liste = [];
     
     jeu.touches = {};
-    // console.log("Nettoyage effectué : ennemis réinitialisés, balles supprimées");
+    console.log("Nettoyage effectué : ennemis réinitialisés, balles supprimées");
 }
 
 // Fonction pour arrêter le jeu
@@ -108,21 +107,21 @@ function arreterJeu() {
         setVar('sonTir', false);
         setVar('sonExplosion', false);
         setVar('sonTouche', false);
-        // console.log("Jeu arrêté : écouteurs supprimés, animations annulées, jeuTermine=true");
+        console.log("Jeu arrêté : écouteurs supprimés, animations annulées, jeuTermine=true");
     } catch (e) {
-        // console.log("Erreur lors de l'arrêt du jeu : " + e.message);
+        console.log("Erreur lors de l'arrêt du jeu : " + e.message);
     }
 }
 
 // Gestion des touches
 function handleKeyDown(e) {
     jeu.touches[e.keyCode] = true;
-    // console.log("Touche enfoncée : " + e.keyCode);
+    console.log("Touche enfoncée : " + e.keyCode);
 }
 
 function handleKeyUp(e) {
     jeu.touches[e.keyCode] = false;
-    // console.log("Touche relâchée : " + e.keyCode);
+    console.log("Touche relâchée : " + e.keyCode);
 }
 
 // Setup Niveau 1
@@ -132,7 +131,7 @@ function initJeuN1() {
     jeu.ennemis.intervalleTir = 2000;
     jeu.joueur.vies = 3;
     jeu.joueur.niveau = 1;
-    // console.log("Niveau 1 initialisé : vitesse=" + jeu.ennemis.vitesse + ", intervalleTir=" + jeu.ennemis.intervalleTir + "ms");
+    console.log("Niveau 1 initialisé : vitesse=" + jeu.ennemis.vitesse + ", intervalleTir=" + jeu.ennemis.intervalleTir + "ms");
     initNiveau();
 }
 
@@ -143,18 +142,18 @@ function initJeuN2() {
     jeu.ennemis.intervalleTir = 2000;
     jeu.joueur.vies = 3;
     jeu.joueur.niveau = 2;
-    // console.log("Niveau 2 initialisé : vitesse=" + jeu.ennemis.vitesse + ", intervalleTir=" + jeu.ennemis.intervalleTir + "ms");
+    console.log("Niveau 2 initialisé : vitesse=" + jeu.ennemis.vitesse + ", intervalleTir=" + jeu.ennemis.intervalleTir + "ms");
     initNiveau();
 }
 
 // Setup Niveau 3
 function initJeuN3() {
-    jeu.ennemis.vitesse = 4;
+    jeu.ennemis.vitesse = 4; // Augmenté de 3 à 4 pour plus de dynamisme
     jeu.ennemis.pasDescente = 20;
-    jeu.ennemis.intervalleTir = 1200;
+    jeu.ennemis.intervalleTir = 1200; // Réduit de 1500ms à 1200ms pour plus de tirs
     jeu.joueur.vies = 3;
     jeu.joueur.niveau = 3;
-    // console.log("Niveau 3 initialisé : vitesse=" + jeu.ennemis.vitesse + ", intervalleTir=" + jeu.ennemis.intervalleTir + "ms");
+    console.log("Niveau 3 initialisé : vitesse=" + jeu.ennemis.vitesse + ", intervalleTir=" + jeu.ennemis.intervalleTir + "ms");
     initNiveau();
 }
 
@@ -165,7 +164,7 @@ function initJeuN4() {
     jeu.ennemis.intervalleTir = 2000;
     jeu.joueur.vies = 3;
     jeu.joueur.niveau = 4;
-    // console.log("Niveau 4 initialisé : vitesse=" + jeu.ennemis.vitesse + ", intervalleTir=" + jeu.ennemis.intervalleTir + "ms");
+    console.log("Niveau 4 initialisé : vitesse=" + jeu.ennemis.vitesse + ", intervalleTir=" + jeu.ennemis.intervalleTir + "ms");
     initNiveau();
 }
 
@@ -176,7 +175,7 @@ function initJeuN5() {
     jeu.ennemis.intervalleTir = 1000;
     jeu.joueur.vies = 3;
     jeu.joueur.niveau = 5;
-    // console.log("Niveau 5 initialisé : vitesse=" + jeu.ennemis.vitesse + ", intervalleTir=" + jeu.ennemis.intervalleTir + "ms");
+    console.log("Niveau 5 initialisé : vitesse=" + jeu.ennemis.vitesse + ", intervalleTir=" + jeu.ennemis.intervalleTir + "ms");
     initNiveau();
 }
 
@@ -199,9 +198,9 @@ function recommencerJeu(vies, niveau) {
         setVar('sonTir', false);
         setVar('sonExplosion', false);
         setVar('sonTouche', false);
-        // console.log("Jeu réinitialisé avec vies=" + vies + ", niveau=" + niveau);
+        console.log("Jeu réinitialisé avec vies=" + vies + ", niveau=" + niveau);
     } catch (e) {
-        // console.log("Erreur lors de la réinitialisation des variables Storyline : " + e.message);
+        console.log("Erreur lors de la réinitialisation des variables Storyline : " + e.message);
     }
     switch (niveau) {
         case 1:
@@ -220,7 +219,7 @@ function recommencerJeu(vies, niveau) {
             initJeuN5();
             break;
         default:
-            // console.log("Erreur : Niveau non valide");
+            console.log("Erreur : Niveau non valide");
             initJeuN1();
             break;
     }
@@ -228,8 +227,8 @@ function recommencerJeu(vies, niveau) {
 
 // Initialisation commune
 function initNiveau() {
-    // console.log("Interface Storyline chargée");
-    // console.log("Niveau démarré à : " + new Date().toLocaleTimeString());
+    console.log("Interface Storyline chargée");
+    console.log("Niveau démarré à : " + new Date().toLocaleTimeString());
     
     // Mettre à jour effetsSonores
     mettreAJourEffetsSonores();
@@ -242,57 +241,57 @@ function initNiveau() {
         setVar('sonTir', false);
         setVar('sonExplosion', false);
         setVar('sonTouche', false);
-        // console.log("Variables sonores réinitialisées : sonTir=false, sonExplosion=false, sonTouche=false");
+        console.log("Variables sonores réinitialisées : sonTir=false, sonExplosion=false, sonTouche=false");
     } catch (e) {
-        // console.log("Erreur lors de la réinitialisation des variables sonores : " + e.message);
+        console.log("Erreur lors de la réinitialisation des variables sonores : " + e.message);
     }
 
     // Forcer la réinitialisation de jeuTermine
     try {
         setVar('jeuTermine', false);
-        // console.log("jeuTermine réinitialisé à false");
+        console.log("jeuTermine réinitialisé à false");
     } catch (e) {
-        // console.log("Erreur lors de la réinitialisation de jeuTermine : " + e.message);
+        console.log("Erreur lors de la réinitialisation de jeuTermine : " + e.message);
     }
 
     cleanUp();
 
     if (typeof gsap === 'undefined') {
-        // console.log("Erreur : gsap n'est pas défini ! Vérifiez l'intégration dans Storyline.");
+        console.log("Erreur : gsap n'est pas défini ! Vérifiez l'intégration dans Storyline.");
         return;
     }
-    // console.log("gsap chargé avec succès.");
+    console.log("gsap chargé avec succès.");
 
     setTimeout(() => {
         const slideLayer = document.querySelector('.slide-layer');
         if (!slideLayer) {
-            // console.log("Erreur : Slide layer non trouvée.");
+            console.log("Erreur : Slide layer non trouvée.");
             return;
         }
         jeu.dimensions.largeur = slideLayer.offsetWidth;
         jeu.dimensions.hauteur = slideLayer.offsetHeight;
-        // console.log("Dimensions responsive : " + jeu.dimensions.largeur + "x" + jeu.dimensions.hauteur);
+        console.log("Dimensions responsive : " + jeu.dimensions.largeur + "x" + jeu.dimensions.hauteur);
 
         jeu.joueur.element = document.querySelector('[data-acc-text="Joueur"]');
         if (!jeu.joueur.element || !jeu.joueur.element.parentNode) {
-            // console.log("Erreur : Élément 'Joueur' non trouvé ou non attaché au DOM.");
+            console.log("Erreur : Élément 'Joueur' non trouvé ou non attaché au DOM.");
             return;
         }
 
         const nombreRangees = getVar('nombreRangees') || 6;
         const nombreColonnes = getVar('nombreColonnes') || 10;
-        // console.log("Grille dynamique : " + nombreRangees + " rangées x " + nombreColonnes + " colonnes.");
+        console.log("Grille dynamique : " + nombreRangees + " rangées x " + nombreColonnes + " colonnes.");
 
         try {
             setVar('ennemisRestants', nombreRangees * nombreColonnes);
             setVar('vies', jeu.joueur.vies);
             setVar('niveau', jeu.joueur.niveau);
         } catch (e) {
-            // console.log("Erreur lors de la définition de ennemisRestants, vies ou niveau : " + e.message);
+            console.log("Erreur lors de la définition de ennemisRestants, vies ou niveau : " + e.message);
         }
 
         const allElements = document.querySelectorAll('[data-acc-text]');
-        // console.log("Éléments avec data-acc-text : ", Array.from(allElements).map(el => el.getAttribute('data-acc-text')));
+        console.log("Éléments avec data-acc-text : ", Array.from(allElements).map(el => el.getAttribute('data-acc-text')));
 
         jeu.ennemis.liste = [];
         let retryCount = 0;
@@ -304,35 +303,35 @@ function initNiveau() {
                     const ennemi = document.querySelector('[data-acc-text="Ennemi_' + rangee + '_' + colonne + '"]');
                     if (ennemi && ennemi.parentNode) {
                         jeu.ennemis.liste.push(ennemi);
-                        // console.log("Ennemi chargé : Ennemi_" + rangee + "_" + colonne);
+                        console.log("Ennemi chargé : Ennemi_" + rangee + "_" + colonne);
                     } else {
-                        // console.log("Avertissement : Ennemi_" + rangee + "_" + colonne + " non trouvé ou non attaché au DOM.");
+                        console.log("Avertissement : Ennemi_" + rangee + "_" + colonne + " non trouvé ou non attaché au DOM.");
                     }
                 }
             }
-            // console.log("Nombre d'ennemis chargés : " + jeu.ennemis.liste.length);
+            console.log("Nombre d'ennemis chargés : " + jeu.ennemis.liste.length);
 
             if (jeu.ennemis.liste.length < nombreRangees * nombreColonnes && retryCount < maxRetries) {
                 retryCount++;
-                // console.log("Nombre insuffisant d'ennemis chargés (" + jeu.ennemis.liste.length + "/" + (nombreRangees * nombreColonnes) + "), nouvelle tentative (" + retryCount + "/" + maxRetries + ")");
+                console.log("Nombre insuffisant d'ennemis chargés (" + jeu.ennemis.liste.length + "/" + (nombreRangees * nombreColonnes) + "), nouvelle tentative (" + retryCount + "/" + maxRetries + ")");
                 setTimeout(chargerEnnemis, 250);
                 return;
             }
 
             if (jeu.ennemis.liste.length === 0) {
-                // console.log("Erreur : Aucun ennemi chargé après " + maxRetries + " tentatives. Vérifiez les noms 'Ennemi_X_Y' dans Storyline.");
+                console.log("Erreur : Aucun ennemi chargé après " + maxRetries + " tentatives. Vérifiez les noms 'Ennemi_X_Y' dans Storyline.");
                 return;
             }
 
             jeu.ennemis.liste = jeu.ennemis.liste.filter(ennemi => ennemi && ennemi.parentNode);
-            // console.log("Ennemis après nettoyage : " + jeu.ennemis.liste.length);
+            console.log("Ennemis après nettoyage : " + jeu.ennemis.liste.length);
 
             const espacementX = jeu.dimensions.largeur / (nombreColonnes + 1);
             const espacementY = Math.min(80, jeu.dimensions.hauteur / (nombreRangees + 10));
             for (let i = 0; i < jeu.ennemis.liste.length; i++) {
                 const ennemi = jeu.ennemis.liste[i];
                 if (!ennemi || !ennemi.parentNode) {
-                    // console.log("Erreur : Ennemi à l'index " + i + " est null ou non attaché au DOM.");
+                    console.log("Erreur : Ennemi à l'index " + i + " est null ou non attaché au DOM.");
                     continue;
                 }
                 try {
@@ -342,9 +341,9 @@ function initNiveau() {
                         y: espacementY + espacementY * Math.floor(i / nombreColonnes),
                         display: 'block'
                     });
-                    // console.log("Positionné ennemi " + i + " à x=" + (espacementX * (i % nombreColonnes + 1) - 25) + ", y=" + (espacementY + espacementY * Math.floor(i / nombreColonnes)));
+                    console.log("Positionné ennemi " + i + " à x=" + (espacementX * (i % nombreColonnes + 1) - 25) + ", y=" + (espacementY + espacementY * Math.floor(i / nombreColonnes)));
                 } catch (e) {
-                    // console.log("Erreur GSAP pour ennemi " + i + ": " + e.message);
+                    console.log("Erreur GSAP pour ennemi " + i + ": " + e.message);
                 }
             }
 
@@ -355,27 +354,27 @@ function initNiveau() {
                         x: jeu.dimensions.largeur / 2 - 25,
                         y: jeu.dimensions.hauteur - 50 - jeu.joueur.hauteur
                     });
-                    // console.log("Position initiale joueur : x=" + (jeu.dimensions.largeur / 2 - 25) + ", y=" + (jeu.dimensions.hauteur - 50 - jeu.joueur.hauteur));
+                    console.log("Position initiale joueur : x=" + (jeu.dimensions.largeur / 2 - 25) + ", y=" + (jeu.dimensions.hauteur - 50 - jeu.joueur.hauteur));
                 } catch (e) {
-                    // console.log("Erreur GSAP pour joueur : " + e.message);
+                    console.log("Erreur GSAP pour joueur : " + e.message);
                     return;
                 }
             } else {
-                // console.log("Erreur : jeu.joueur.element est null ou non attaché au DOM.");
+                console.log("Erreur : jeu.joueur.element est null ou non attaché au DOM.");
                 return;
             }
 
             // Vérifier jeuTermine avant de démarrer la boucle
             try {
-                // console.log("Valeur de jeuTermine avant boucleJeu : " + getVar('jeuTermine'));
+                console.log("Valeur de jeuTermine avant boucleJeu : " + getVar('jeuTermine'));
             } catch (e) {
-                // console.log("Erreur lors de la lecture de jeuTermine avant boucleJeu : " + e.message);
+                console.log("Erreur lors de la lecture de jeuTermine avant boucleJeu : " + e.message);
             }
 
             document.addEventListener('keydown', handleKeyDown);
             document.addEventListener('keyup', handleKeyUp);
 
-            // console.log("Démarrage de boucleJeu");
+            console.log("Démarrage de boucleJeu");
             boucleJeu();
         }
 
@@ -387,11 +386,11 @@ function initNiveau() {
 function boucleJeu() {
     try {
         if (getVar('jeuTermine')) {
-            // console.log("Boucle arrêtée : jeuTermine=true");
+            console.log("Boucle arrêtée : jeuTermine=true");
             return;
         }
     } catch (e) {
-        // console.log("Erreur lors de la lecture de jeuTermine : " + e.message);
+        console.log("Erreur lors de la lecture de jeuTermine : " + e.message);
         return;
     }
 
@@ -407,7 +406,7 @@ function boucleJeu() {
 // Entrées clavier
 function gererEntrees() {
     if (!jeu.joueur.element || !jeu.joueur.element.parentNode) {
-        // console.log("Erreur : jeu.joueur.element est null ou non attaché au DOM dans gererEntrees");
+        console.log("Erreur : jeu.joueur.element est null ou non attaché au DOM dans gererEntrees");
         return;
     }
     if (jeu.touches[37]) {
@@ -435,7 +434,7 @@ function deplacerEnnemis() {
         try {
             gsap.to(jeu.ennemis.liste[i], {x: nouveauX, duration: 0.05});
         } catch (e) {
-            // console.log("Erreur GSAP pour ennemi " + i + " dans deplacerEnnemis : " + e.message);
+            console.log("Erreur GSAP pour ennemi " + i + " dans deplacerEnnemis : " + e.message);
             continue;
         }
 
@@ -446,9 +445,9 @@ function deplacerEnnemis() {
                 setVar('jeuTermine', true);
                 setVar('finJeu', true);
                 setVar('jeuPerdu', true);
-                // console.log("Niveau perdu : ennemi à hauteur max");
+                console.log("Niveau perdu : ennemi à hauteur max");
             } catch (e) {
-                // console.log("Erreur lors de la définition de jeuTermine/finJeu/jeuPerdu : " + e.message);
+                console.log("Erreur lors de la définition de jeuTermine/finJeu/jeuPerdu : " + e.message);
             }
         }
     }
@@ -461,7 +460,7 @@ function deplacerEnnemis() {
             try {
                 gsap.to(jeu.ennemis.liste[i], {y: nouveauY, duration: 0.3});
             } catch (e) {
-                // console.log("Erreur GSAP pour ennemi " + i + " dans descente : " + e.message);
+                console.log("Erreur GSAP pour ennemi " + i + " dans descente : " + e.message);
             }
         }
     }
@@ -470,12 +469,12 @@ function deplacerEnnemis() {
 // Tirer une balle
 function tirerBalle(deElement, direction) {
     if (!deElement || !deElement.parentNode) {
-        // console.log("Erreur : deElement est null ou non attaché au DOM dans tirerBalle");
+        console.log("Erreur : deElement est null ou non attaché au DOM dans tirerBalle");
         return;
     }
     const modele = direction > 0 ? document.querySelector('[data-acc-text="modeleBalleJoueur"]') : document.querySelector('[data-acc-text="modeleBalleEnnemi"]');
     if (!modele || !modele.parentNode) {
-        // console.log("Erreur : Modèle de balle non trouvé ou non attaché au DOM.");
+        console.log("Erreur : Modèle de balle non trouvé ou non attaché au DOM.");
         return;
     }
 
@@ -483,7 +482,7 @@ function tirerBalle(deElement, direction) {
     balle.style.display = 'block';
     const slideLayer = document.querySelector('.slide-layer');
     if (!slideLayer) {
-        // console.log("Erreur : Slide layer non trouvée pour ajouter la balle.");
+        console.log("Erreur : Slide layer non trouvée pour ajouter la balle.");
         return;
     }
     slideLayer.appendChild(balle);
@@ -493,7 +492,7 @@ function tirerBalle(deElement, direction) {
     try {
         gsap.set(balle, {x: deX, y: deY});
     } catch (e) {
-        // console.log("Erreur GSAP pour balle : " + e.message);
+        console.log("Erreur GSAP pour balle : " + e.message);
         balle.remove();
         return;
     }
@@ -503,12 +502,12 @@ function tirerBalle(deElement, direction) {
     if (direction > 0 && jeu.sons.effetsSonores) {
         try {
             setVar('sonTir', true);
-            // console.log("Tir déclenché : sonTir=true, effetsSonores=" + jeu.sons.effetsSonores);
+            console.log("Tir déclenché : sonTir=true, effetsSonores=" + jeu.sons.effetsSonores);
         } catch (e) {
-            // console.log("Erreur lors de la définition de sonTir : " + e.message);
+            console.log("Erreur lors de la définition de sonTir : " + e.message);
         }
     } else if (direction > 0) {
-        // console.log("Tir déclenché : sonTir=false (effetsSonores=false)");
+        console.log("Tir déclenché : sonTir=false (effetsSonores=false)");
     }
 }
 
@@ -521,7 +520,7 @@ function deplacerBalles() {
         try {
             gsap.to(balle.element, {y: nouveauY, duration: 0.05});
         } catch (e) {
-            // console.log("Erreur GSAP pour balle " + i + " dans deplacerBalles : " + e.message);
+            console.log("Erreur GSAP pour balle " + i + " dans deplacerBalles : " + e.message);
             continue;
         }
 
@@ -543,7 +542,7 @@ function tirEnnemi() {
             tirerBalle(ennemiAleatoire, -1);
             jeu.ennemis.dernierTir = Date.now();
             jeu.ennemis.intervalleTir = Math.max(jeu.ennemis.intervalleTir, intervalleMin);
-            // console.log("Tir ennemi déclenché, prochain tir dans : " + jeu.ennemis.intervalleTir + "ms");
+            console.log("Tir ennemi déclenché, prochain tir dans : " + jeu.ennemis.intervalleTir + "ms");
         }
     }
 }
@@ -564,12 +563,12 @@ function verifierCollisions() {
                     if (jeu.sons.effetsSonores) {
                         try {
                             setVar('sonExplosion', true);
-                            // console.log("Collision ennemi : sonExplosion=true, effetsSonores=" + jeu.sons.effetsSonores);
+                            console.log("Collision ennemi : sonExplosion=true, effetsSonores=" + jeu.sons.effetsSonores);
                         } catch (e) {
-                            // console.log("Erreur lors de la définition de sonExplosion : " + e.message);
+                            console.log("Erreur lors de la définition de sonExplosion : " + e.message);
                         }
                     } else {
-                        // console.log("Collision ennemi : sonExplosion=false (effetsSonores=false)");
+                        console.log("Collision ennemi : sonExplosion=false (effetsSonores=false)");
                     }
                     gsap.set(ennemi, { display: 'none' });
                     balle.element.remove();
@@ -580,9 +579,9 @@ function verifierCollisions() {
                         setVar('scoreJeu', scoreActuel + 10);
                         const ennemisRestants = jeu.ennemis.liste.filter(e => e && e.parentNode && gsap.getProperty(e, 'display') !== 'none').length;
                         setVar('ennemisRestants', ennemisRestants);
-                        // console.log("Ennemis restants après collision : " + ennemisRestants);
-                    } collide {
-                        // console.log("Erreur lors de la gestion du score ou ennemisRestants : " + e.message);
+                        console.log("Ennemis restants après collision : " + ennemisRestants);
+                    } catch (e) {
+                        console.log("Erreur lors de la gestion du score ou ennemisRestants : " + e.message);
                     }
                     break;
                 }
@@ -594,12 +593,12 @@ function verifierCollisions() {
                 if (jeu.sons.effetsSonores) {
                     try {
                         setVar('sonTouche', true);
-                        // console.log("Collision joueur : sonTouche=true, effetsSonores=" + jeu.sons.effetsSonores);
+                        console.log("Collision joueur : sonTouche=true, effetsSonores=" + jeu.sons.effetsSonores);
                     } catch (e) {
-                        // console.log("Erreur lors de la définition de sonTouche : " + e.message);
+                        console.log("Erreur lors de la définition de sonTouche : " + e.message);
                     }
                 } else {
-                    // console.log("Collision joueur : sonTouche=false (effetsSonores=false)");
+                    console.log("Collision joueur : sonTouche=false (effetsSonores=false)");
                 }
                 balle.element.remove();
                 jeu.balles.liste.splice(b, 1);
@@ -611,10 +610,10 @@ function verifierCollisions() {
                         setVar('jeuTermine', true);
                         setVar('finJeu', true);
                         setVar('jeuPerdu', true);
-                        // console.log("Niveau perdu : vies épuisées");
+                        console.log("Niveau perdu : vies épuisées");
                     }
                 } catch (e) {
-                    // console.log("Erreur lors de la gestion des vies : " + e.message);
+                    console.log("Erreur lors de la gestion des vies : " + e.message);
                 }
             }
         }
@@ -622,7 +621,7 @@ function verifierCollisions() {
 
     // Vérifier la victoire
     const ennemisVisibles = jeu.ennemis.liste.filter(ennemi => ennemi && ennemi.parentNode && gsap.getProperty(ennemi, 'display') !== 'none').length;
-    // console.log("Ennemis visibles : " + ennemisVisibles);
+    console.log("Ennemis visibles : " + ennemisVisibles);
     if (ennemisVisibles === 0) {
         try {
             const niveauActuel = jeu.joueur.niveau;
@@ -630,9 +629,9 @@ function verifierCollisions() {
             setVar('niveau', jeu.joueur.niveau);
             setVar('jeuTermine', true);
             setVar('finNiveau' + niveauActuel, true);
-            // console.log("Niveau gagné : finNiveau" + niveauActuel + ", nouveau niveau=" + jeu.joueur.niveau);
+            console.log("Niveau gagné : finNiveau" + niveauActuel + ", nouveau niveau=" + jeu.joueur.niveau);
         } catch (e) {
-            // console.log("Erreur lors de la gestion de la victoire : " + e.message);
+            console.log("Erreur lors de la gestion de la victoire : " + e.message);
         }
     }
 }
@@ -663,13 +662,13 @@ window.Script2 = function()
 function animateEnnemis(ennemi_danse_1, ennemi_danse_2, ennemi_danse_3) {
     // Vérifier que les objets existent
     if (!ennemi_danse_1 || !ennemi_danse_2 || !ennemi_danse_3) {
-        // console.log("Erreur : Un ou plusieurs ennemis (ennemi_danse_1, ennemi_danse_2, ennemi_danse_3) non fournis ou non trouvés.");
+        console.log("Erreur : Un ou plusieurs ennemis (ennemi_danse_1, ennemi_danse_2, ennemi_danse_3) non fournis ou non trouvés.");
         return;
     }
 
     // Vérifier que GSAP est chargé
     if (typeof gsap === 'undefined') {
-        // console.log("Erreur : GSAP n'est pas défini ! Vérifiez l'intégration dans Storyline.");
+        console.log("Erreur : GSAP n'est pas défini ! Vérifiez l'intégration dans Storyline.");
         return;
     }
 
@@ -721,7 +720,7 @@ function animateEnnemis(ennemi_danse_1, ennemi_danse_2, ennemi_danse_3) {
         ease: "power2.in"
     }, 0.6);
 
-    // console.log("Animation des ennemis déclenchée pour ennemi_danse_1, ennemi_danse_2, ennemi_danse_3");
+    console.log("Animation des ennemis déclenchée pour ennemi_danse_1, ennemi_danse_2, ennemi_danse_3");
 }
 
 // Rendre la fonction globale
