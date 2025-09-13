@@ -5,6 +5,13 @@
     "linkedin": "https://www.linkedin.com/in/karimbelkacem/",
     "projects": [
         {
+            "preview": "/portfolio/images/projet/projet14.png",
+            "title": "entretienSim360",
+            "description": "Dans cet exemple en JS et GSAP, la fonction initiale récupère l’ID de la zone de texte Storyline via getVar et l'assigne à un objet temporaire pour l'animation. La fonction de mise à jour anime la valeur de 0 à 100 en 2 secondes avec un effet, elle met à jour d’une variable via setVar à chaque frame, et ajuste la transparence de la zone de texte à chaque changement. L'animation est synchronisée avec la timeline Storyline via addToTimeline. Vous pouvez télécharger la source au format .story - url : <a href=\"https://github.com/karimbel/portfolio/blob/main/_sources-storyline\">_sources-storyline/api-javascript-avancee-01.story</a>",
+            "caracteristique": "Storyline360, JS, GSAP, HTML5",
+            "link": "https://karimbel.github.io/portfolio/projets/api-javascript-avancee-01/story.html"
+        },
+        {
             "preview": "/portfolio/images/projet/projet13.png",
             "title": "entretienSim360",
             "description": "Simulateur RH d’entretien interactif, conçu avec Articulate Storyline 360 et JavaScript. Les candidats relèvent trois scénarios (Motivation, Évaluation, Personnalisation) à trois niveaux (Débutant, Expérimenté, Expert), avec un dialogue vidéo pour le mini-simulateur. Scores dynamiques (Compétences, Empathie, Organisation) et satisfaction ajustée, avec commentaires IMPACT personnalisés. Outil polyvalent pour le diagnostic et la présélection.",
